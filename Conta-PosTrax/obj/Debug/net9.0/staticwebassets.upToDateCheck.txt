@@ -1,0 +1,137 @@
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\favicon.ico
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\css\notyf.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\dist\jquery.slim.min.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\css\site.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\css\sweetalert.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\js\sweetalert.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\js\notyf.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\js\ToastMessage.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\dist\jquery.min.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\dist\jquery.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\js\site.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\dist\jquery.slim.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\dist\jquery.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\LICENSE.txt
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery\dist\jquery.slim.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation\LICENSE.md
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\js\apexcharts.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation\dist\jquery.validate.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\css\notyf.min.css
+wwwroot\css\site.css
+wwwroot\css\sweetalert.css
+wwwroot\favicon.ico
+wwwroot\js\apexcharts.min.js
+wwwroot\js\notyf.min.js
+wwwroot\js\site.js
+wwwroot\js\sweetalert.min.js
+wwwroot\js\ToastMessage.js
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\jquery\dist\jquery.js
+wwwroot\lib\jquery\dist\jquery.min.js
+wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\lib\jquery\dist\jquery.slim.js
+wwwroot\lib\jquery\dist\jquery.slim.min.js
+wwwroot\lib\jquery\dist\jquery.slim.min.map
+wwwroot\lib\jquery\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
+wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
