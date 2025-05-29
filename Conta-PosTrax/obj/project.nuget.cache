@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GZ+84iEz2TU=",
+  "dgSpecHash": "emlPW4o5VIY=",
   "success": true,
   "projectFilePath": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\Conta-PosTrax.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CLINICARE\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\CLINICARE\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\CLINICARE\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\CLINICARE\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\6.0.0\\microsoft.aspnetcore.mvc.razor.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\CLINICARE\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\9.0.5\\microsoft.aspnetcore.mvc.razor.runtimecompilation.9.0.5.nupkg.sha512",
     "C:\\Users\\CLINICARE\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
