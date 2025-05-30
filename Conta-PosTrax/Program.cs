@@ -45,7 +45,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SameSite = SameSiteMode.Lax;
         options.Cookie.SecurePolicy = isDevelopment ? CookieSecurePolicy.None : CookieSecurePolicy.SameAsRequest;
         options.Cookie.HttpOnly = true;
-        options.Cookie.Name = "HEDS.Auth";
+        options.Cookie.Name = "Conta_PosTrax.Auth";
     });
 
 // 5. Configuraci�n de pol�ticas de cookies
