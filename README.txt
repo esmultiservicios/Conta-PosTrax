@@ -1,6 +1,7 @@
 ##########Nuget Instalados##########
 1. Microsoft.Data.SqlClient
-1. Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+2. Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+3. BCrypt.Net-N
 
-##########Ignore Fikes##########
+##########Ignore Files##########
 .vs/
