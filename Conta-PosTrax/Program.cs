@@ -1,4 +1,5 @@
-﻿using Conta_PosTrax.Utilities;
+﻿using Conta_PosTrax.Services;
+using Conta_PosTrax.Utilities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -31,7 +32,7 @@ builder.Services.AddControllersWithViews()
 
 // 3. Configuración de acceso a datos
 builder.Services.AddScoped<IBaseDataAccess, BaseDataAccess>();
-//builder.Services.AddScoped<IMenuService, MenuService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 
 // 4. Configuraci�n de autenticaci�n
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

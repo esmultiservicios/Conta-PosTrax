@@ -79,8 +79,6 @@ C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\t6mf6phqqa-muycvpuwrr.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\6hpto4sag8-87fc7y1x7t.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\q0vnrovt6h-mlv21k5csn.gz
-C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\mio3gy7iaq-8majrpmzdz.gz
-C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\6a6gejg4sj-8majrpmzdz.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\staticwebassets.build.json
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\staticwebassets.development.json
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -487,3 +485,8 @@ C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\9eojzossp1-it76drgj3u.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\aqslxlj3w5-1egzevqxj9.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\Conta-Po.FEECE8B9.Up2Date
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\Conta-PosTrax.sourcelink.json
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\scopedcss\Views\Shared\Componets\Menu\Default.cshtml.rz.scp.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\mio3gy7iaq-8kvgp2o9fq.gz
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\6a6gejg4sj-8kvgp2o9fq.gz

@@ -13,10 +13,10 @@ namespace Conta_PosTrax.Utilities
 
     public class BaseDataAccess : IBaseDataAccess
     {
-        private const string servidor = "HNCRSAP-SQL01";
-        private const string baseDeDatos = "HEDS";
-        private const string usuario = "hedsDB";
-        private const string contrasena = "HedsDB214";
+        private const string servidor = "154.38.186.111";
+        private const string baseDeDatos = "Conta_PosTrax";
+        private const string usuario = "sa";
+        private const string contrasena = "*>R*Bg?GqZ,3YvS";
 
         public static string db_HEDS = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contrasena};Encrypt=false;TrustServerCertificate=True;";
 

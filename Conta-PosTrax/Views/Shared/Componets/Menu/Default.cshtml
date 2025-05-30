@@ -1,0 +1,39 @@
+﻿@model List<Conta_PosTrax.Models.MenuModel>
+<ul class="side-nav">
+    <li class="side-nav-title side-nav-item">
+        <span class="menu-text">NAVEGACIÓN</span>
+    </li>
+    @foreach (var menu in Model)
+    {
+        bool hasSubmenus = menu.SubMenus != null && menu.SubMenus.Any();
+        <li class="side-nav-item @(hasSubmenus ? "has-submenu" : "")">
+            <a class="side-nav-link @(hasSubmenus ? "collapsed" : "")"
+               href="@(hasSubmenus ? "#" : menu.Url)"
+            @if (hasSubmenus)
+            {
+                @:data-toggle="submenu"
+            }>
+                <i class="fa-solid @menu.Icono fa-lg"></i>
+                <span class="menu-text">@menu.Titulo</span>
+                @if (hasSubmenus)
+                {
+                    <i class="fas fa-chevron-down menu-arrow"></i>
+                }
+            </a>
+            @if (hasSubmenus && menu.SubMenus != null)
+            {
+                <ul class="sub-menu">
+                    @foreach (var subMenu in menu.SubMenus)
+                    {
+                        <li>
+                            <a href="@subMenu.Url" class="submenu-link">
+                                <i class="fa-solid @(string.IsNullOrEmpty(subMenu.Icono) ? "fa-circle-dot" : subMenu.Icono) fa-sm submenu-icon"></i>
+                                <span>@subMenu.Titulo</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+</ul>

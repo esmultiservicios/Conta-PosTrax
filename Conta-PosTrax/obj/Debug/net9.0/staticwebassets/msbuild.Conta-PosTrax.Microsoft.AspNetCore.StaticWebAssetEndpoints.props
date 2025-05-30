@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.8majrpmzdz.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.8majrpmzdz.bundle.scp.css'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.8kvgp2o9fq.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.8kvgp2o9fq.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8majrpmzdz"},{"Name":"integrity","Value":"sha256-gCSNHAFTeCqz6Ir1l\u002BxiwGPet0PtuzblpOqCWIXOT6I="},{"Name":"label","Value":"_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1131"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022gCSNHAFTeCqz6Ir1l\u002BxiwGPet0PtuzblpOqCWIXOT6I=\u0022"},{"Name":"Last-Modified","Value":"Thu, 29 May 2025 21:47:16 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8kvgp2o9fq"},{"Name":"integrity","Value":"sha256-yMTS/NYE080Qn\u002BRToFPbhH34odpTfCBNMDzBQUsEBy0="},{"Name":"label","Value":"_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2277"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022yMTS/NYE080Qn\u002BRToFPbhH34odpTfCBNMDzBQUsEBy0=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 00:55:31 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.8majrpmzdz.bundle.scp.css'))</AssetFile>
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.8kvgp2o9fq.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-gCSNHAFTeCqz6Ir1l\u002BxiwGPet0PtuzblpOqCWIXOT6I="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1131"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022gCSNHAFTeCqz6Ir1l\u002BxiwGPet0PtuzblpOqCWIXOT6I=\u0022"},{"Name":"Last-Modified","Value":"Thu, 29 May 2025 21:47:16 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-yMTS/NYE080Qn\u002BRToFPbhH34odpTfCBNMDzBQUsEBy0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2277"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022yMTS/NYE080Qn\u002BRToFPbhH34odpTfCBNMDzBQUsEBy0=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 00:55:31 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/css/notyf.min.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\notyf.min.css'))</AssetFile>
