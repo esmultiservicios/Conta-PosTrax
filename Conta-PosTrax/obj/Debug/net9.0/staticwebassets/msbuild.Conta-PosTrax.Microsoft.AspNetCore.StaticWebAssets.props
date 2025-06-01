@@ -8136,23 +8136,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\plugins\twitter-bootstrap-wizard\prettify.js'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.489nfj1l0w.bundle.scp.css'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.mrew519pbv.bundle.scp.css'))">
       <SourceType>Package</SourceType>
       <SourceId>Conta-PosTrax</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Conta-PosTrax</BasePath>
-      <RelativePath>Conta-PosTrax.489nfj1l0w.bundle.scp.css</RelativePath>
+      <RelativePath>Conta-PosTrax.mrew519pbv.bundle.scp.css</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>Reference</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName>ScopedCss</AssetTraitName>
       <AssetTraitValue>ProjectBundle</AssetTraitValue>
-      <Fingerprint>489nfj1l0w</Fingerprint>
-      <Integrity>jIb6HjmE+XLNs3no+Xy7dBFU5GhA1zkLo8/kTOHwBjw=</Integrity>
+      <Fingerprint>mrew519pbv</Fingerprint>
+      <Integrity>wqu02z6krAtP2hcw/2mETtfyVlG2hwVdft2J7fLIUB0=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.489nfj1l0w.bundle.scp.css'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.mrew519pbv.bundle.scp.css'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\notyf.min.css'))">
       <SourceType>Package</SourceType>

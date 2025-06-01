@@ -1,8 +1,11 @@
-﻿using Conta_PosTrax.Services;
-using System.Security.Claims;
+﻿// Components/MenuViewComponent.cs
+using Conta_PosTrax.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
-namespace Conta_PosTrax.ViewComponents
+namespace Conta_PosTrax.Components
 {
     public class MenuViewComponent : ViewComponent
     {
@@ -15,9 +18,11 @@ namespace Conta_PosTrax.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            // Mantener tu lógica original para obtener el rol
             var rol = (User as ClaimsPrincipal)?.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-            if (string.IsNullOrEmpty(rol))
-                return Content(string.Empty);
+
+            // Establecer "Super Administrador" si es nulo o vacío
+            rol = string.IsNullOrEmpty(rol) ? "Super Administrador" : rol;
 
             var menus = await _menuService.ObtenerMenusPorRol(rol);
             return View(menus);

@@ -5424,17 +5424,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-QH6vB52/8lHuLw7cPQPd2T7\u002ByReakplKorr0SXSJLQ8="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"13608"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022QH6vB52/8lHuLw7cPQPd2T7\u002ByReakplKorr0SXSJLQ8=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Mar 2025 02:00:31 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.489nfj1l0w.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.489nfj1l0w.bundle.scp.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"489nfj1l0w"},{"Name":"integrity","Value":"sha256-jIb6HjmE\u002BXLNs3no\u002BXy7dBFU5GhA1zkLo8/kTOHwBjw="},{"Name":"label","Value":"_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4549"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jIb6HjmE\u002BXLNs3no\u002BXy7dBFU5GhA1zkLo8/kTOHwBjw=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 22:10:14 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.489nfj1l0w.bundle.scp.css'))</AssetFile>
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.mrew519pbv.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-jIb6HjmE\u002BXLNs3no\u002BXy7dBFU5GhA1zkLo8/kTOHwBjw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4549"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jIb6HjmE\u002BXLNs3no\u002BXy7dBFU5GhA1zkLo8/kTOHwBjw=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 22:10:14 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-wqu02z6krAtP2hcw/2mETtfyVlG2hwVdft2J7fLIUB0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4550"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022wqu02z6krAtP2hcw/2mETtfyVlG2hwVdft2J7fLIUB0=\u0022"},{"Name":"Last-Modified","Value":"Sat, 31 May 2025 02:53:24 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.mrew519pbv.bundle.scp.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.mrew519pbv.bundle.scp.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"mrew519pbv"},{"Name":"integrity","Value":"sha256-wqu02z6krAtP2hcw/2mETtfyVlG2hwVdft2J7fLIUB0="},{"Name":"label","Value":"_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4550"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022wqu02z6krAtP2hcw/2mETtfyVlG2hwVdft2J7fLIUB0=\u0022"},{"Name":"Last-Modified","Value":"Sat, 31 May 2025 02:53:24 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/css/notyf.min.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\notyf.min.css'))</AssetFile>

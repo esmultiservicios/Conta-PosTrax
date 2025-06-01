@@ -1,0 +1,127 @@
+﻿@* Views/Shared/Components/Menu/Default.cshtml *@
+@model List<Conta_PosTrax.Models.MenuModel>?
+
+@{
+    var menusFiltrados = Model?
+        .Where(m => m != null && m.TieneAcceso)
+        .OrderBy(m => m?.Orden ?? 0)
+        .ToList() ?? new List<Conta_PosTrax.Models.MenuModel>();
+}
+
+@if (!menusFiltrados.Any())
+{
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-warning">
+                        <span class="alert alert-warning">No hay menús disponibles.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title"><span>Main</span></li>
+
+                    @foreach (var menu in menusFiltrados)
+                    {
+                        var subMenusValidos = menu.SubMenus?
+                        .Where(s => s != null && s.TieneAcceso)
+                        .OrderBy(s => s?.Orden ?? 0)
+                        .ToList() ?? new List<Conta_PosTrax.Models.MenuModel>();
+
+                        var tieneSubmenus = subMenusValidos.Any();
+                        var esActivo = !string.IsNullOrEmpty(menu.Url) &&
+                        (menu.Url == Context.Request.Path ||
+                        subMenusValidos.Any(s => !string.IsNullOrEmpty(s.Url) && s.Url == Context.Request.Path));
+
+                        <li class="@(tieneSubmenus ? "submenu" : "") @(esActivo ? "active" : "")">
+                            <a href="@(tieneSubmenus ? "#" : menu.Url ?? "#")">
+                                @if (!string.IsNullOrEmpty(menu.Icono))
+                                {
+                                    <i data-feather="@menu.Icono"></i>
+                                }
+                                else
+                                {
+                                    <i data-feather="circle"></i>
+                                }
+                                <span>@menu.Descripcion</span>
+                                @if (tieneSubmenus)
+                                {
+                                    <span class="menu-arrow"></span>
+                                }
+                            </a>
+
+                            @if (tieneSubmenus)
+                            {
+                                <ul>
+                                    @foreach (var subMenu in subMenusValidos)
+                                    {
+                                        <li class="@(!string.IsNullOrEmpty(subMenu.Url) && subMenu.Url == Context.Request.Path ? "active" : "")">
+                                            <a href="@subMenu.Url">
+                                                @if (!string.IsNullOrEmpty(subMenu.Icono))
+                                                {
+                                                    <i data-feather="@subMenu.Icono"></i>
+                                                }
+                                                <span>@subMenu.Descripcion</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar feather icons
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+
+            // Manejar estado activo y clics
+            const currentPath = window.location.pathname;
+
+            // Función para expandir/colapsar submenús
+            function toggleSubmenu(submenuElement) {
+                if (!submenuElement) return;
+
+                const isShowing = submenuElement.style.display === 'block';
+                submenuElement.style.display = isShowing ? 'none' : 'block';
+                submenuElement.parentElement.classList.toggle('active', !isShowing);
+            }
+
+            // Manejar submenús activos
+            document.querySelectorAll('.submenu ul li.active').forEach(activeItem => {
+                const parentSubmenu = activeItem.closest('.submenu');
+                if (parentSubmenu) {
+                    const submenuUl = parentSubmenu.querySelector('ul');
+                    if (submenuUl) {
+                        submenuUl.style.display = 'block';
+                        parentSubmenu.classList.add('active');
+                    }
+                }
+            });
+
+            // Manejar clics en elementos con submenú
+            document.querySelectorAll('.submenu > a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const submenu = this.parentElement.querySelector('ul');
+                    toggleSubmenu(submenu);
+                });
+            });
+        });
+    </script>
+}

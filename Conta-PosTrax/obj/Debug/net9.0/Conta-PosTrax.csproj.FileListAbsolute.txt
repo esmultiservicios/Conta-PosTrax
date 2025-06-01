@@ -487,7 +487,6 @@ C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\Conta-Po.FEECE8B9.Up2Date
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\bin\Debug\net9.0\BCrypt.Net-Next.dll
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\Conta-PosTrax.sourcelink.json
-C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\scopedcss\Views\Shared\Componets\Menu\Default.cshtml.rz.scp.css
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\scopedcss\Views\Shared\_NavBarLateral.cshtml.rz.scp.css
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\scopedcss\Views\Shared\_NavBarTop.cshtml.rz.scp.css
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\b4m4psv5bv-qb5pmw6k43.gz
@@ -601,6 +600,8 @@ C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\6gozienbxm-b1csgj2xnb.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\2wg4uanr5w-q00ixk55c1.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\wkdfn5jzpl-g8d7flualx.gz
-C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\mio3gy7iaq-489nfj1l0w.gz
-C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\6a6gejg4sj-489nfj1l0w.gz
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\xl5h0diyl1-11h0nf97lv.gz
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\scopedcss\Views\Shared\Components\Menu\Default.cshtml.rz.scp.css
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\mio3gy7iaq-mrew519pbv.gz
+C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\obj\Debug\net9.0\compressed\6a6gejg4sj-mrew519pbv.gz
