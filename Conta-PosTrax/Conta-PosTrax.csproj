@@ -14,4 +14,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SQL_Operations2">
+      <HintPath>..\..\Dlls\SQL_Operations2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

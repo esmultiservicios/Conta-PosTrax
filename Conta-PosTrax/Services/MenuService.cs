@@ -31,29 +31,26 @@ namespace Conta_PosTrax.Services
 
             try
             {
-                string query = @"
-                SELECT 
-                    m.Id,
-                    m.Descripcion,
-                    m.DescripcionInterna,
-                    m.Icono,
-                    m.Url,
-                    m.Orden,
-                    CASE WHEN p.Permisos LIKE '%""ver"":true%' OR p.Permisos LIKE '%""ver"":1%' THEN 1 ELSE 0 END AS TieneAcceso,
-                    CASE WHEN p.Permisos LIKE '%""editar"":true%' OR p.Permisos LIKE '%""editar"":1%' THEN 1 ELSE 0 END AS PuedeEditar,
-                    CASE WHEN p.Permisos LIKE '%""eliminar"":true%' OR p.Permisos LIKE '%""eliminar"":1%' THEN 1 ELSE 0 END AS PuedeEliminar,
-                    'Main' AS Grupo,
-                    p.Permisos
-                FROM [Seguridad].[Menus] m
-                LEFT JOIN [Seguridad].[Permisos] p ON m.Id = p.MenuId 
-                INNER JOIN [Seguridad].[Roles] r ON p.RolId = r.Id AND r.Rol = @Rol
-                WHERE m.Activo = 1 AND m.MenuId IS NULL
-                ORDER BY m.Orden";
+                string query = @"SELECT	m.Id,m.Descripcion,m.DescripcionInterna,
+		                                m.Icono,m.Url,m.Orden,
+		                                CASE WHEN p.Permisos LIKE '%""ver"":true%' OR p.Permisos LIKE '%""ver"": 1%' THEN 1 ELSE 0 END AS TieneAcceso,
+		                                CASE WHEN p.Permisos LIKE '%""editar"":true%' OR p.Permisos LIKE '%""editar"": 1%' THEN 1 ELSE 0 END AS PuedeEditar,
+		                                CASE WHEN p.Permisos LIKE '%""eliminar"":true%' OR p.Permisos LIKE '%""eliminar"": 1%' THEN 1 ELSE 0 END AS PuedeEliminar,
+		                                'Main' AS Grupo,p.Permisos
+                                FROM [Seguridad].[Menus] m
+	                                LEFT JOIN [Seguridad].[Permisos] p 
+		                                ON m.Id = p.MenuId 
+	                                INNER JOIN [Seguridad].[Roles] r 
+		                                ON p.RolId = r.Id AND r.Rol =  @Rol
+                                WHERE m.Activo = 1 AND m.MenuId IS NULL
+                                ORDER BY m.Orden";
 
                 var parameters = new Dictionary<string, object> { { "@Rol", rol } };
                 var result = await _dataAccess.ExecuteQueryAsync(query, parameters);
 
-                if (result == null || result.Rows.Count == 0)
+
+
+                if (result == null)
                 {
                     return new List<MenuModel>();
                 }

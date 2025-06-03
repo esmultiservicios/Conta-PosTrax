@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Diagnostics;
+using DBase_Operations;
 using Microsoft.Data.SqlClient;
 
 namespace Conta_PosTrax.Utilities
@@ -17,7 +18,7 @@ namespace Conta_PosTrax.Utilities
         private const string baseDeDatos = "Conta_PosTrax";
         private const string usuario = "sa";
         private const string contrasena = "*>R*Bg?GqZ,3YvS";
-
+        public MSSQLServerLowLevel _dataLear = new MSSQLServerLowLevel(servidor, baseDeDatos, usuario, contrasena);
         public static string db_HEDS = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contrasena};Encrypt=false;TrustServerCertificate=True;";
 
         public async Task<bool> ExecuteNonQuery(string query, Dictionary<string, object>? parameters = null)
