@@ -28,7 +28,7 @@ else
         <div class="sidebar-inner slimscroll">
             <div id="sidebar-menu" class="sidebar-menu">
                 <ul>
-                    <li class="menu-title"><span>Main</span></li>
+                    <li class="menu-title"><span>POST-TRAX MENU</span></li>
 
                     @foreach (var menu in menusFiltrados)
                     {
@@ -46,11 +46,11 @@ else
                             <a href="@(tieneSubmenus ? "#" : menu.Url ?? "#")">
                                 @if (!string.IsNullOrEmpty(menu.Icono))
                                 {
-                                    <i data-feather="@menu.Icono"></i>
+                                    <i class="@menu.Icono"></i>
                                 }
                                 else
                                 {
-                                    <i data-feather="circle"></i>
+                                    <i class="fas fa-circle"></i>
                                 }
                                 <span>@menu.Descripcion</span>
                                 @if (tieneSubmenus)
@@ -68,7 +68,7 @@ else
                                             <a href="@subMenu.Url">
                                                 @if (!string.IsNullOrEmpty(subMenu.Icono))
                                                 {
-                                                    <i data-feather="@subMenu.Icono"></i>
+                                                    <i class="@subMenu.Icono"></i>
                                                 }
                                                 <span>@subMenu.Descripcion</span>
                                             </a>
@@ -85,11 +85,6 @@ else
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-
             // Manejar estado activo y clics
             const currentPath = window.location.pathname;
 

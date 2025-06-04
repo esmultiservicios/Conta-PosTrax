@@ -48,8 +48,6 @@ namespace Conta_PosTrax.Services
                 var parameters = new Dictionary<string, object> { { "@Rol", rol } };
                 var result = await _dataAccess.ExecuteQueryAsync(query, parameters);
 
-
-
                 if (result == null)
                 {
                     return new List<MenuModel>();

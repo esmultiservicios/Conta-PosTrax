@@ -18,12 +18,12 @@ namespace Conta_PosTrax.Utilities
         private const string baseDeDatos = "Conta_PosTrax";
         private const string usuario = "sa";
         private const string contrasena = "*>R*Bg?GqZ,3YvS";
-        public MSSQLServerLowLevel _dataLear = new MSSQLServerLowLevel(servidor, baseDeDatos, usuario, contrasena);
-        public static string db_HEDS = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contrasena};Encrypt=false;TrustServerCertificate=True;";
+        public MSSQLServerLowLevel _dataMULTIFAST = new MSSQLServerLowLevel(servidor, baseDeDatos, usuario, contrasena);
+        public static string db_MULTIFAST = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contrasena};Encrypt=false;TrustServerCertificate=True;";
 
         public async Task<bool> ExecuteNonQuery(string query, Dictionary<string, object>? parameters = null)
         {
-            using (var connection = new SqlConnection(db_HEDS))
+            using (var connection = new SqlConnection(db_MULTIFAST))
             {
                 try
                 {
@@ -54,7 +54,7 @@ namespace Conta_PosTrax.Utilities
 
         public async Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object>? parameters = null)
         {
-            using (var connection = new SqlConnection(db_HEDS))
+            using (var connection = new SqlConnection(db_MULTIFAST))
             {
                 try
                 {
@@ -88,7 +88,7 @@ namespace Conta_PosTrax.Utilities
 
         public async Task<object?> ExecuteScalarAsync(string query, Dictionary<string, object>? parameters = null)
         {
-            using (var connection = new SqlConnection(db_HEDS))
+            using (var connection = new SqlConnection(db_MULTIFAST))
             {
                 await connection.OpenAsync();
                 using (var command = new SqlCommand(query, connection))

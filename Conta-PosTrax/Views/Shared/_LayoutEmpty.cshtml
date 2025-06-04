@@ -16,39 +16,16 @@
 
     @RenderSection("Styles", required: false)
 </head>
-<body class="nk-body bg-lighter npc-default has-sidebar no-touch nk-nio-theme">
-    <div class="main-wrapper">
-        @* NavBarTop *@
-        @await Html.PartialAsync("_NavBarTop")
-
-        @* NavBarTop *@
-        @await Html.PartialAsync("_NavBarLateral")
-
-        <div class="page-wrapper">
-            <div class="content container-fluid">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        </div>
-
-        @*
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2025 - Conta-PosTrax - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer> 
-        *@
-    </div>
+<body>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
 
     @* Scripts Plantilla *@
     <script src="~/assets/js/jquery.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/bootstrap.bundle.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/feather.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/js/all.min.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/assets/plugins/apexchart/apexcharts.min.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/assets/plugins/apexchart/chart-data.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/script.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/notyf.min.js?v=@(DateTime.Now.Ticks)"></script>
