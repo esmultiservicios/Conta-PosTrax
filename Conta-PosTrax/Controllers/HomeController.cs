@@ -13,7 +13,7 @@ namespace Conta_PosTrax.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IBaseDataAccess _dataAccess;
-
+        private readonly BaseDataAccess _dta;
         public HomeController(ILogger<HomeController> logger, IBaseDataAccess dataAccess)
         {
             _logger = logger;
@@ -135,7 +135,7 @@ namespace Conta_PosTrax.Controllers
 
                 // 4. Crear hash (DEBUG: Registrar la contraseña y hash)
                 _logger.LogInformation($"Registrando: Gafete={model.Gafete}, Password={model.Password}");
-                string hashedPassword = "";//Utilities.Security.HashPassword(model.Password);
+                string hashedPassword = _dta.Encrypt.EncryptString(model.Password) ;//Utilities.Security.HashPassword(model.Password);
                 _logger.LogInformation($"Hash generado: {hashedPassword}");
 
                 // 4. Insertar en BD
