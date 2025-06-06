@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using DBase_Operations;
 using Microsoft.Data.SqlClient;
-using DBase_Operations;
+
 namespace Conta_PosTrax.Utilities
 {
     public interface IBaseDataAccess
@@ -10,6 +10,9 @@ namespace Conta_PosTrax.Utilities
         Task<bool> ExecuteNonQuery(string query, Dictionary<string, object>? parameters = null);
         Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object>? parameters = null);
         Task<object?> ExecuteScalarAsync(string query, Dictionary<string, object>? parameters = null);
+
+        Encrypt Encrypt { get; }
+        MSSQLServerLowLevel _dataMULTIFAST { get; }
     }
 
     public class BaseDataAccess : IBaseDataAccess
@@ -18,8 +21,11 @@ namespace Conta_PosTrax.Utilities
         private const string baseDeDatos = "Conta_PosTrax";
         private const string usuario = "sa";
         private const string contrasena = "*>R*Bg?GqZ,3YvS";
-        public MSSQLServerLowLevel _dataMULTIFAST = new MSSQLServerLowLevel(servidor, baseDeDatos, usuario, contrasena);
-        public Encrypt Encrypt = new Encrypt();
+
+        // Tus propiedades originales (ahora implementan la interfaz)
+        public MSSQLServerLowLevel _dataMULTIFAST { get; } = new MSSQLServerLowLevel(servidor, baseDeDatos, usuario, contrasena);
+        public Encrypt Encrypt { get; } = new Encrypt();
+
         public static string db_MULTIFAST = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contrasena};Encrypt=false;TrustServerCertificate=True;";
 
         public async Task<bool> ExecuteNonQuery(string query, Dictionary<string, object>? parameters = null)
@@ -35,7 +41,6 @@ namespace Conta_PosTrax.Utilities
                         {
                             foreach (var param in parameters)
                             {
-                                // Mejor manejo de parámetros
                                 var sqlParam = new SqlParameter(param.Key, param.Value ?? DBNull.Value);
                                 command.Parameters.Add(sqlParam);
                             }

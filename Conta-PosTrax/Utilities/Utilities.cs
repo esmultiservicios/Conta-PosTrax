@@ -1,7 +1,9 @@
-﻿using System.Diagnostics.Eventing.Reader;
+﻿using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using BCrypt.Net;
+using Newtonsoft.Json;
 
 namespace Conta_PosTrax.Utilities
 {
@@ -62,6 +64,192 @@ namespace Conta_PosTrax.Utilities
                 var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$");
                 return regex.IsMatch(password);
             }
+        }
+
+        /// <summary>
+        /// Proporciona funcionalidad de logging centralizado para la aplicación Conta_PosTrax.
+        /// Registra mensajes estructurados en la tabla [System].[Logs] de la base de datos.
+        /// </summary>
+        /// <remarks>
+        /// Características principales:
+        /// - Registro con múltiples niveles de severidad (Information, Warning, Error, Debug)
+        /// - Captura de información contextual (usuario, máquina, versión de app)
+        /// - Soporte para datos adicionales en formato JSON
+        /// - Manejo automático de campos NULL y truncamiento de textos largos
+        /// </remarks>
+        public static class AppLogger
+        {
+            private static IBaseDataAccess? _dataAccess;
+            private static string _appVersion = "1.0.0";
+            private static readonly string _machineName = Environment.MachineName;
+
+            /// <summary>
+            /// Inicializa el sistema de logging con las dependencias necesarias.
+            /// </summary>
+            /// <param name="dataAccess">Instancia de IBaseDataAccess configurada</param>
+            /// <param name="appVersion">Versión de la aplicación (opcional, default: "1.0.0")</param>
+            /// <exception cref="ArgumentNullException">Se lanza si dataAccess es null</exception>
+            /// <example>
+            /// AppLogger.Initialize(dataAccess, Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            /// </example>
+            public static void Initialize(IBaseDataAccess dataAccess, string? appVersion = null)
+            {
+                _dataAccess = dataAccess ?? throw new ArgumentNullException(nameof(dataAccess));
+                _appVersion = appVersion ?? _appVersion;
+            }
+
+            /// <summary>
+            /// Método centralizado para registro de logs en la base de datos.
+            /// </summary>
+            /// <param name="message">Mensaje descriptivo (requerido, max 2000 chars)</param>
+            /// <param name="logLevel">Nivel de severidad (default: Information)</param>
+            /// <param name="tableName">Tabla/modulo relacionado (opcional, max 255 chars)</param>
+            /// <param name="usuario">Usuario asociado (opcional, max 255 chars)</param>
+            /// <param name="exception">Excepción relacionada (opcional)</param>
+            /// <param name="additionalData">Objeto adicional para serializar como JSON (opcional)</param>
+            /// <remarks>
+            /// Estructura de la tabla destino:
+            /// - Logs se guardan en [System].[Logs]
+            /// - Campos UpdateAt no se llenan automáticamente
+            /// - CreateAt se establece con la fecha actual del servidor de BD
+            /// </remarks>
+            public static async void Log(string message, string logLevel = "Information",
+                                      string? tableName = null, string? usuario = null,
+                                      Exception? exception = null, object? additionalData = null)
+            {
+                if (_dataAccess == null)
+                {
+                    Debug.WriteLine("Logger no inicializado. No se puede registrar el log.");
+                    return;
+                }
+
+                try
+                {
+                    string? stackTrace = exception?.StackTrace;
+                    string? additionalDataJson = additionalData != null
+                        ? JsonConvert.SerializeObject(additionalData)
+                        : null;
+
+                    string query = @"
+                    INSERT INTO [System].[Logs] (
+                        [LogDate], [LogLevel], [Message], [StackTrace], 
+                        [TableName], [Usuario], [MachineName], [AppVersion], 
+                        [AdditionalData], [CreateAt]
+                    ) VALUES (
+                        @LogDate, @LogLevel, @Message, @StackTrace, 
+                        @TableName, @Usuario, @MachineName, @AppVersion, 
+                        @AdditionalData, @CreateAt
+                    )";
+
+                    var parameters = new Dictionary<string, object?>
+                    {
+                        { "@LogDate", DateTime.Now },
+                        { "@LogLevel", logLevel },
+                        { "@Message", message.Length > 2000 ? message[..2000] : message },
+                        { "@StackTrace", stackTrace != null && stackTrace.Length > 4000 ? stackTrace[..4000] : stackTrace },
+                        { "@TableName", tableName },
+                        { "@Usuario", usuario },
+                        { "@MachineName", _machineName },
+                        { "@AppVersion", _appVersion },
+                        { "@AdditionalData", additionalDataJson },
+                        { "@CreateAt", DateTime.Now }
+                    };
+
+                    // Convertir a Dictionary<string, object> no nullable
+                    var nonNullableParameters = new Dictionary<string, object>();
+                    foreach (var kvp in parameters)
+                    {
+                        nonNullableParameters.Add(kvp.Key, kvp.Value ?? DBNull.Value);
+                    }
+
+                    await _dataAccess.ExecuteNonQuery(query, nonNullableParameters);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error al registrar log: {ex.Message}");
+                    Console.WriteLine($"[{logLevel}] {message}");
+                    if (exception != null) Console.WriteLine(exception);
+                }
+            }
+
+            /// <summary>
+            /// Registra un mensaje informativo en el sistema de logs.
+            /// </summary>
+            /// <param name="message">Mensaje descriptivo del evento (máx. 2000 caracteres)</param>
+            /// <param name="tableName">Nombre de la tabla o módulo relacionado (opcional, máx. 255 caracteres)</param>
+            /// <param name="usuario">Nombre del usuario asociado a la acción (opcional, máx. 255 caracteres)</param>
+            /// <param name="additionalData">Objeto adicional con datos relevantes (se serializa a JSON)</param>
+            /// <example>
+            /// Logger.LogInformation("Usuario autenticado correctamente", "Autenticación", "jperez", 
+            ///     new { SessionId = sessionId, IP = ipAddress });
+            /// </example>
+            /// <remarks>
+            /// Nivel de severidad: Information
+            /// Uso típico: Eventos normales de la aplicación que deben ser registrados
+            /// </remarks>
+            public static void LogInformation(string message, string? tableName = null, string? usuario = null, object? additionalData = null)
+                => Log(message, "Information", tableName, usuario, null, additionalData);
+
+            /// <summary>
+            /// Registra una advertencia en el sistema de logs.
+            /// </summary>
+            /// <param name="message">Descripción de la situación anómala (máx. 2000 caracteres)</param>
+            /// <param name="tableName">Nombre de la tabla o módulo relacionado (opcional, máx. 255 caracteres)</param>
+            /// <param name="usuario">Nombre del usuario asociado a la acción (opcional, máx. 255 caracteres)</param>
+            /// <param name="additionalData">Objeto adicional con datos relevantes (se serializa a JSON)</param>
+            /// <example>
+            /// Logger.LogWarning("Intento de acceso fallido", "Seguridad", null, 
+            ///     new { Intentos = 3, UltimoIntento = DateTime.Now });
+            /// </example>
+            /// <remarks>
+            /// Nivel de severidad: Warning
+            /// Uso típico: Situaciones inusuales que no son errores pero requieren atención
+            /// </remarks>            
+            public static void LogWarning(string message, string? tableName = null, string? usuario = null, object? additionalData = null)
+                => Log(message, "Warning", tableName, usuario, null, additionalData);
+
+            /// <summary>
+            /// Registra un error en el sistema de logs, opcionalmente con información de excepción.
+            /// </summary>
+            /// <param name="message">Descripción del error (máx. 2000 caracteres)</param>
+            /// <param name="exception">Excepción relacionada (opcional, incluye stack trace)</param>
+            /// <param name="tableName">Nombre de la tabla o módulo relacionado (opcional, máx. 255 caracteres)</param>
+            /// <param name="usuario">Nombre del usuario asociado a la acción (opcional, máx. 255 caracteres)</param>
+            /// <param name="additionalData">Objeto adicional con datos relevantes (se serializa a JSON)</param>
+            /// <example>
+            /// try {
+            ///     // Código que puede fallar
+            /// } catch (Exception ex) {
+            ///     Logger.LogError("Error al procesar pago", ex, "Pagos", currentUser, 
+            ///         new { OrderId = orderId, Amount = amount });
+            ///     throw;
+            /// }
+            /// </example>
+            /// <remarks>
+            /// Nivel de severidad: Error
+            /// Uso típico: Captura de excepciones y errores de negocio importantes
+            /// </remarks>            
+            public static void LogError(string message, Exception? exception = null, string? tableName = null, string? usuario = null, object? additionalData = null)
+                => Log(message, "Error", tableName, usuario, exception, additionalData);
+
+            /// <summary>
+            /// Registra información de depuración en el sistema de logs.
+            /// </summary>
+            /// <param name="message">Mensaje de depuración (máx. 2000 caracteres)</param>
+            /// <param name="tableName">Nombre de la tabla o módulo relacionado (opcional, máx. 255 caracteres)</param>
+            /// <param name="usuario">Nombre del usuario asociado a la acción (opcional, máx. 255 caracteres)</param>
+            /// <param name="additionalData">Objeto adicional con datos relevantes (se serializa a JSON)</param>
+            /// <example>
+            /// Logger.LogDebug($"Valor temporal calculado: {tempValue}", "Cálculos", null, 
+            ///     new { InputParams = parameters, Step = currentStep });
+            /// </example>
+            /// <remarks>
+            /// Nivel de severidad: Debug
+            /// Uso típico: Información técnica útil para desarrollo y troubleshooting
+            /// Nota: Estos logs suelen desactivarse en producción
+            /// </remarks>
+            public static void LogDebug(string message, string? tableName = null, string? usuario = null, object? additionalData = null)
+                => Log(message, "Debug", tableName, usuario, null, additionalData);
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Conta_PosTrax.Utilities;
+using static Conta_PosTrax.Utilities.Utilities;
 
 namespace Conta_PosTrax.Controllers
 {
@@ -13,7 +14,7 @@ namespace Conta_PosTrax.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IBaseDataAccess _dataAccess;
-        private readonly BaseDataAccess _dta;
+
         public HomeController(ILogger<HomeController> logger, IBaseDataAccess dataAccess)
         {
             _logger = logger;
@@ -26,49 +27,65 @@ namespace Conta_PosTrax.Controllers
         {
             try
             {
+                // Registro de inicio de operación
+                AppLogger.LogInformation($"Iniciando obtención de usuario ID: {id}", "Usuarios", User.Identity?.Name);
+
                 string query = @"
                 SELECT 
-                    u.Id AS 'UsuarioId',
-                    u.Gafete,
-                    e.Nombre AS NombreCompleto,
-                    r.NombreRol AS RolNombre,
-                    u.RolId,
-                    u.Activo
+                    u.Id AS UsuarioId,
+                    u.Usuario,
+                    u.Correo,
+                    u.Status AS Activo,
+                    r.Id AS RolId,
+                    r.Nombre AS RolNombre,
+                    e.Id AS EmpleadoId,
+                    e.Nombre,
+                    e.Apellido,
+                    e.FechaIngreso,
+                    e.FotoURL
                 FROM   
-                    [HEDS].[Seguridad].[Usuarios] u
-                INNER JOIN [HEDS].[Seguridad].[Roles] r ON u.RolId = r.Id
-                INNER JOIN [HEDS].[Coffe].[Empleados] e ON u.Gafete = e.CodEmpleado
+                    [Seguridad].[Usuarios] u
+                INNER JOIN [Seguridad].[Roles] r ON u.RolId = r.Id
+                INNER JOIN [RRHH].[Empleados] e ON u.Id = e.UsuarioId
                 WHERE 
                     u.Id = @UsuarioId";
 
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@UsuarioId", id }
-                };
+                var parameters = new Dictionary<string, object> { { "@UsuarioId", id } };
 
                 var result = await _dataAccess.ExecuteQueryAsync(query, parameters);
 
                 if (result.Rows.Count == 0)
                 {
+                    AppLogger.LogWarning($"Usuario no encontrado ID: {id}", "Usuarios", User.Identity?.Name);
                     return NotFound(new { success = false, message = "Usuario no encontrado" });
                 }
 
                 var row = result.Rows[0];
 
-                var user = new User
+                var user = new
                 {
                     UsuarioId = Convert.ToInt32(row["UsuarioId"]),
-                    NombreCompleto = row["NombreCompleto"]?.ToString() ?? string.Empty,
-                    RolNombre = row["RolNombre"]?.ToString() ?? string.Empty,
+                    Usuario = row["Usuario"]?.ToString(),
+                    Correo = row["Correo"]?.ToString(),
                     RolId = Convert.ToInt32(row["RolId"]),
+                    RolNombre = row["RolNombre"]?.ToString(),
                     Activo = Convert.ToBoolean(row["Activo"]),
-                    Password = "" // no se retorna nunca
+                    Empleado = new
+                    {
+                        Id = Convert.ToInt32(row["EmpleadoId"]),
+                        Nombre = row["Nombre"]?.ToString(),
+                        Apellido = row["Apellido"]?.ToString(),
+                        FechaIngreso = row["FechaIngreso"] != DBNull.Value ? Convert.ToDateTime(row["FechaIngreso"]) : (DateTime?)null,
+                        FotoURL = row["FotoURL"]?.ToString()
+                    }
                 };
 
+                AppLogger.LogInformation($"Usuario obtenido exitosamente ID: {id}", "Usuarios", User.Identity?.Name);
                 return Ok(new { success = true, data = user });
             }
             catch (Exception ex)
             {
+                AppLogger.LogError($"Error al obtener usuario ID: {id}", ex, "Usuarios", User.Identity?.Name, new { UserId = id });
                 _logger.LogError(ex, $"Error al obtener usuario ID: {id}");
                 return StatusCode(500, new { success = false, message = "Error interno del servidor" });
             }
@@ -82,36 +99,42 @@ namespace Conta_PosTrax.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage);
+
+                AppLogger.LogWarning("Registro fallido - Modelo inválido", "Registro", null, new { Errores = errors });
+
                 return Json(new
                 {
                     success = false,
-                    errors = ModelState.Values
-                        .SelectMany(v => v.Errors)
-                        .Select(e => e.ErrorMessage)
+                    errors = errors
                 });
             }
 
             try
             {
-                // 1. Verificar que el usuario existe
-                var usuario = await _dataAccess.ExecuteQueryAsync(
-                "SELECT [CodEmpleado] FROM [HEDS].[Coffe].[Empleados] WHERE [CodEmpleado] = @Gafete",
-                new Dictionary<string, object> { { "@Gafete", model.Gafete } });
+                AppLogger.LogDebug($"Iniciando registro para: {model.Correo}", "Registro");
 
-                if (usuario.Rows.Count == 0)
+                // 1. Verificar si el correo ya está registrado
+                var existeUsuario = await _dataAccess.ExecuteQueryAsync(
+                    "SELECT COUNT(1) FROM [Seguridad].[Usuarios] WHERE Correo = @Correo",
+                    new Dictionary<string, object> { { "@Correo", model.Correo } });
+
+                if (Convert.ToInt32(existeUsuario.Rows[0][0]) > 0)
                 {
+                    AppLogger.LogWarning($"Intento de registro con correo existente: {model.Correo}", "Registro");
                     return Json(new
                     {
                         success = false,
-                        type = "error",
-                        title = "Error",
-                        message = "Gafete no encontrado"
+                        message = "Este correo ya está registrado"
                     });
                 }
 
                 // 2. Validar fortaleza de contraseña
                 if (model.Password.Length < 6)
                 {
+                    AppLogger.LogWarning("Contraseña demasiado corta", "Registro", null, new { Longitud = model.Password.Length });
                     return Json(new
                     {
                         success = false,
@@ -119,55 +142,60 @@ namespace Conta_PosTrax.Controllers
                     });
                 }
 
-                // 3. Verificar si el gafete existe
-                var existe = await _dataAccess.ExecuteQueryAsync(
-                    "SELECT COUNT(1) FROM [HEDS].[Seguridad].[Usuarios] WHERE Gafete = @Gafete",
-                    new Dictionary<string, object> { { "@Gafete", model.Gafete } });
+                // 3. Crear hash de contraseña
+                string hashedPassword = _dataAccess.Encrypt.EncryptString(model.Password);
+                AppLogger.LogDebug("Contraseña encriptada exitosamente", "Registro");
 
-                if (Convert.ToInt32(existe.Rows[0][0]) > 0)
-                {
-                    return Json(new
+                // 4. Insertar en transacción
+                await _dataAccess.ExecuteNonQuery("BEGIN TRANSACTION");
+
+                // 4.1 Insertar usuario
+                string nombreUsuario = model.Correo.Split('@')[0];
+                await _dataAccess.ExecuteNonQuery(
+                    @"INSERT INTO [Seguridad].[Usuarios] 
+                        (Usuario, Correo, Password, Status, RolId)
+                        VALUES (@Usuario, @Correo, @Password, 1, 2)",
+                    new Dictionary<string, object>
                     {
-                        success = false,
-                        message = "Este gafete ya está registrado"
+                        { "@Usuario", nombreUsuario },
+                        { "@Correo", model.Correo },
+                        { "@Password", hashedPassword }
                     });
+
+                // 4.2 Obtener ID del nuevo usuario
+                var userId = await _dataAccess.ExecuteScalarAsync("SELECT SCOPE_IDENTITY()");
+
+                if (userId == null)
+                {
+                    AppLogger.LogError("No se pudo obtener ID de usuario durante registro", null, "Registro");
+                    throw new InvalidOperationException("No se pudo obtener el ID del usuario creado");
                 }
 
-                // 4. Crear hash (DEBUG: Registrar la contraseña y hash)
-                _logger.LogInformation($"Registrando: Gafete={model.Gafete}, Password={model.Password}");
-                string hashedPassword = _dta.Encrypt.EncryptString(model.Password) ;//Utilities.Security.HashPassword(model.Password);
-                _logger.LogInformation($"Hash generado: {hashedPassword}");
+                // 4.3 Insertar empleado
+                await _dataAccess.ExecuteNonQuery(
+                    @"INSERT INTO [RRHH].[Empleados]
+                    (UsuarioId, Nombre, Apellido, FechaIngreso, Estado)
+                    VALUES (@UsuarioId, @Nombre, @Apellido, GETDATE(), 1)",
+                    new Dictionary<string, object>
+                    {
+                        { "@UsuarioId", userId },
+                        { "@Nombre", model.Nombre },
+                        { "@Apellido", model.Apellido }
+                    });
 
-                // 4. Insertar en BD
-                await _dataAccess.ExecuteQueryAsync(
-                    @"INSERT INTO [HEDS].[Seguridad].[Usuarios] 
-                    (
-                        Gafete, 
-                        Password, 
-                        RolId, 
-                        Activo
-                    ) 
-                    VALUES (
-                        @Gafete, 
-                        @Password, 
-                        2, 
-                        1
-                    )",
+                await _dataAccess.ExecuteNonQuery("COMMIT TRANSACTION");
 
-                new Dictionary<string, object>
-                {
-                    { "@Gafete", model.Gafete },
-                    { "@Password", hashedPassword }
-                });
-
+                AppLogger.LogInformation($"Registro exitoso para: {model.Correo}", "Registro", nombreUsuario);
                 return Json(new
                 {
                     success = true,
-                    redirectUrl = Url.Action("Login", "")
+                    redirectUrl = Url.Action("Login", "Home")
                 });
             }
             catch (Exception ex)
             {
+                await _dataAccess.ExecuteNonQuery("IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION");
+                AppLogger.LogError("Error en registro", ex, "Registro", null, new { Correo = model.Correo });
                 _logger.LogError(ex, "Error en registro");
                 return Json(new
                 {
@@ -184,92 +212,101 @@ namespace Conta_PosTrax.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage);
+
+                AppLogger.LogWarning("Login fallido - Modelo inválido", "Login", null, new { Errores = errors });
+
                 return Json(new
                 {
                     success = false,
-                    message = "Por favor complete todos los campos"
+                    message = "Por favor complete todos los campos",
+                    errors = errors
                 });
             }
 
             try
             {
-                _logger.LogInformation($"Intento de login - Correo: {model.Usuario}");
+                AppLogger.LogDebug($"Intento de login: {model.Usuario}", "Login");
 
-                string QueryUser = @"SELECT 
-	                u.[Id],
+                string query = @"SELECT 
+                    u.[Id],
                     u.[Usuario],
                     u.[Correo],
                     u.[Password],
                     u.[Status],
-                    u.[FechaCreacion],
-                    r.[RolId],
-                    r.[Rol],
-                    u.[CreateAt],
-                    u.[UpdateAt]
-                FROM [Conta_PosTrax].[Seguridad].[Usuarios] AS u
-                INNER JOIN [Conta_PosTrax].[Seguridad].[Roles] AS r ON u.RolId = r.Id
-                WHERE u.[Status] = @Status AND u.[Correo] = @Correo";
+                    r.[Id] AS RolId,
+                    r.[Nombre] AS Rol,
+                    e.[Nombre],
+                    e.[Apellido]
+                FROM [Seguridad].[Usuarios] u
+                INNER JOIN [Seguridad].[Roles] r ON u.RolId = r.Id
+                LEFT JOIN [RRHH].[Empleados] e ON u.Id = e.UsuarioId
+                WHERE u.[Status] = 1 
+                AND (u.[Usuario] = @Credencial OR u.[Correo] = @Credencial)";
 
-                var parametersQuery = new Dictionary<string, object> {
-                    { "@Status", 1 },
-                    { "@Correo", model.Usuario } 
-                };
+                var parameters = new Dictionary<string, object> { { "@Credencial", model.Usuario } };
 
-                var result = await _dataAccess.ExecuteQueryAsync(QueryUser, parametersQuery);
+                var result = await _dataAccess.ExecuteQueryAsync(query, parameters);
 
                 if (result.Rows.Count == 0)
                 {
-                    _logger.LogWarning($"Usuario no encontrado - Gafete: {model.Usuario}");
+                    AppLogger.LogWarning($"Credenciales no encontradas: {model.Usuario}", "Login");
+                    _logger.LogWarning($"Credenciales no encontradas: {model.Usuario}");
                     return Json(new
                     {
                         success = false,
-                        message = "Usuario o contraseña incorrectos"
+                        message = "Usuario/Correo o contraseña incorrectos"
                     });
                 }
 
                 var row = result.Rows[0];
                 string storedHash = row["Password"]?.ToString() ?? string.Empty;
 
-                _logger.LogInformation($"Hash almacenado: {storedHash}");
-                _logger.LogInformation($"Contraseña recibida: {model.Password}");
-
-                if (!Convert.ToBoolean(row["Activo"]))
+                // Verificación de contraseña usando DecryptString
+                bool passwordValid = false;
+                try
                 {
-                    return Json(new
-                    {
-                        success = false,
-                        message = "Cuenta desactivada. Contacte al administrador."
-                    });
+                    string decryptedPassword = _dataAccess.Encrypt.DecryptString(storedHash);
+                    passwordValid = model.Password == decryptedPassword;
                 }
-
-                bool passwordValid = true;//Utilities.Security.VerifyPassword(model.Password, storedHash);
-                _logger.LogInformation($"Resultado verificación: {passwordValid}");
+                catch (Exception decryptEx)
+                {
+                    AppLogger.LogError("Error al desencriptar contraseña", decryptEx, "Login");
+                    _logger.LogError(decryptEx, "Error al desencriptar contraseña");
+                    passwordValid = false;
+                }
 
                 if (!passwordValid)
                 {
+                    AppLogger.LogWarning("Contraseña inválida", "Login", row["Usuario"]?.ToString());
                     return Json(new
                     {
                         success = false,
-                        message = "Usuario o contraseña incorrectos"
+                        message = "Usuario/Correo o contraseña incorrectos"
                     });
                 }
 
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, row["Id"]?.ToString() ?? string.Empty),
-                    new Claim("Correo", row["Correo"]?.ToString() ?? string.Empty),
+                    new Claim(ClaimTypes.Name, $"{row["Nombre"]?.ToString() ?? ""} {row["Apellido"]?.ToString() ?? ""}".Trim()),
+                    new Claim(ClaimTypes.Email, row["Correo"]?.ToString() ?? string.Empty),
                     new Claim(ClaimTypes.Role, row["Rol"]?.ToString() ?? string.Empty),
-                    new Claim("RolId", row["RolId"]?.ToString() ?? "0")
+                    new Claim("Usuario", row["Usuario"]?.ToString() ?? string.Empty)
                 };
 
                 await HttpContext.SignInAsync(
-                    new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)),
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(new ClaimsIdentity(claims)),
                     new AuthenticationProperties
                     {
                         IsPersistent = false,
-                        ExpiresUtc = DateTime.UtcNow.AddMinutes(30)
+                        ExpiresUtc = DateTime.UtcNow.AddHours(8)
                     });
 
+                AppLogger.LogInformation($"Login exitoso para: {model.Usuario}", "Login", row["Usuario"]?.ToString());
                 return Json(new
                 {
                     success = true,
@@ -278,6 +315,7 @@ namespace Conta_PosTrax.Controllers
             }
             catch (Exception ex)
             {
+                AppLogger.LogError("Error en login", ex, "Login", null, new { Usuario = model.Usuario });
                 _logger.LogError(ex, "Error en login");
                 return Json(new
                 {
@@ -286,6 +324,7 @@ namespace Conta_PosTrax.Controllers
                 });
             }
         }
+
         [HttpGet("")]
         [AllowAnonymous]
         public IActionResult Login()
@@ -315,9 +354,11 @@ namespace Conta_PosTrax.Controllers
         [Authorize]
         public async Task<IActionResult> Logout()
         {
+            var username = User.Identity?.Name;
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            // Limpiar todo el almacenamiento local
+            AppLogger.LogInformation("Logout exitoso", "Logout", username);
+
             return Json(new
             {
                 redirectUrl = Url.Action("Login", ""),
@@ -329,7 +370,8 @@ namespace Conta_PosTrax.Controllers
         [Authorize]
         public IActionResult CheckAuth()
         {
-            // Devuelve información básica del usuario
+            AppLogger.LogDebug("Verificación de autenticación", "AuthCheck", User.Identity?.Name);
+
             return Ok(new
             {
                 authenticated = true,
@@ -343,7 +385,10 @@ namespace Conta_PosTrax.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            AppLogger.LogError("Error en la aplicación", null, "Global", null, new { RequestId = requestId });
+
+            return View(new ErrorViewModel { RequestId = requestId });
         }
     }
 }
