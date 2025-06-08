@@ -1813,10 +1813,6 @@
       "PackagePath": "staticwebassets\\assets\\plugins\\twitter-bootstrap-wizard\\prettify.js"
     },
     {
-      "Id": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\css\\all.min.css",
-      "PackagePath": "staticwebassets\\css\\all.min.css"
-    },
-    {
       "Id": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
     },

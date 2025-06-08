@@ -136,7 +136,6 @@ C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\lib\jque
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\assets\plugins\twitter-bootstrap-wizard\form-wizard.css
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\assets\plugins\jvectormap\jquery-jvectormap-in-mill.js
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\assets\plugins\chartjs\chart-data.js
-C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\css\all.min.css
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\assets\plugins\alertify\alertify.min.js
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\assets\plugins\flot\jquery.flot.js
 C:\CLINICARE Proyects\Visual Studio\Conta-PosTrax\Conta-PosTrax\wwwroot\assets\img\arrow.svg
@@ -636,7 +635,6 @@ wwwroot\assets\plugins\twitter-bootstrap-wizard\form-wizard.css
 wwwroot\assets\plugins\twitter-bootstrap-wizard\form-wizard.js
 wwwroot\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js
 wwwroot\assets\plugins\twitter-bootstrap-wizard\prettify.js
-wwwroot\css\all.min.css
 wwwroot\css\login.css
 wwwroot\css\notyf.min.css
 wwwroot\css\site.css
