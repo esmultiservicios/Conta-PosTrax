@@ -178,7 +178,7 @@ namespace Conta_PosTrax.Controllers
                         { "@UsuarioId", userId },
                         { "@Nombre", model.Nombre },
                         { "@Apellido", model.Apellido },
-                        { "@Genero", "O" }, // Valor por defecto
+                        { "@Genero", "M" },
                         { "@CreadoPor", userId }
                     });
 

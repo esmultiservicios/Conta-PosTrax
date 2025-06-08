@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aKUwU+X8mbnA8EeDbP4UMLfs0B6MkZaEHchoLAoHhek=",
+  "Hash": "ultygpt3YYwh8Lc1Clkhhd2fmSpgdSOgTnrLnnK/eVc=",
   "Source": "Conta-PosTrax",
   "BasePath": "_content/Conta-PosTrax",
   "Mode": "Default",
@@ -185,12 +185,12 @@
       "OriginalItemSpec": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\css\\login.css"
     },
     {
-      "Identity": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-mefd5x3y3i.gz",
+      "Identity": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-yecwahwed2.gz",
       "SourceId": "Conta-PosTrax",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Conta-PosTrax",
-      "RelativePath": "js/login#[.{fingerprint=mefd5x3y3i}]?.js.gz",
+      "RelativePath": "js/login#[.{fingerprint=yecwahwed2}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -199,8 +199,8 @@
       "RelatedAsset": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\login.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "o2poc23gz6",
-      "Integrity": "EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io=",
+      "Fingerprint": "3ghj9gjkqj",
+      "Integrity": "E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\login.js"
@@ -248,12 +248,12 @@
       "OriginalItemSpec": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\assets\\img\\icons\\invoices-icon5.svg"
     },
     {
-      "Identity": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-d9gb14ig07.gz",
+      "Identity": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-ns0qmz9g8w.gz",
       "SourceId": "Conta-PosTrax",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Conta-PosTrax",
-      "RelativePath": "js/main#[.{fingerprint=d9gb14ig07}]?.js.gz",
+      "RelativePath": "js/main#[.{fingerprint=ns0qmz9g8w}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -262,8 +262,8 @@
       "RelatedAsset": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\main.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "hwyyd3r3dy",
-      "Integrity": "z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g=",
+      "Fingerprint": "y9ebwk2tqf",
+      "Integrity": "+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\main.js"
@@ -13681,8 +13681,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "mefd5x3y3i",
-      "Integrity": "Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0=",
+      "Fingerprint": "yecwahwed2",
+      "Integrity": "JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\login.js"
@@ -13702,8 +13702,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d9gb14ig07",
-      "Integrity": "EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg=",
+      "Fingerprint": "ns0qmz9g8w",
+      "Integrity": "h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\main.js"
@@ -79313,12 +79313,12 @@
     },
     {
       "Route": "js/login.js",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-mefd5x3y3i.gz",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-yecwahwed2.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000576368876"
+          "Quality": "0.000742942051"
         }
       ],
       "ResponseHeaders": [
@@ -79328,15 +79328,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1734"
+          "Value": "1345"
         },
         {
           "Name": "ETag",
-          "Value": "\"EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io=\""
+          "Value": "\"E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:16 GMT"
+          "Value": "Sun, 08 Jun 2025 03:19:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79356,13 +79356,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0=\""
+          "Value": "W/\"JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0="
+          "Value": "sha256-JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI="
         }
       ]
     },
@@ -79377,7 +79377,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5844"
+          "Value": "3932"
         },
         {
           "Name": "Content-Type",
@@ -79385,11 +79385,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0=\""
+          "Value": "\"JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:16 GMT"
+          "Value": "Sun, 08 Jun 2025 03:19:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79399,13 +79399,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0="
+          "Value": "sha256-JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI="
         }
       ]
     },
     {
       "Route": "js/login.js.gz",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-mefd5x3y3i.gz",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-yecwahwed2.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -79414,7 +79414,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1734"
+          "Value": "1345"
         },
         {
           "Name": "Content-Type",
@@ -79422,11 +79422,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io=\""
+          "Value": "\"E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:16 GMT"
+          "Value": "Sun, 08 Jun 2025 03:19:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79444,18 +79444,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io="
+          "Value": "sha256-E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk="
         }
       ]
     },
     {
-      "Route": "js/login.mefd5x3y3i.js",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-mefd5x3y3i.gz",
+      "Route": "js/login.yecwahwed2.js",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-yecwahwed2.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000576368876"
+          "Quality": "0.000742942051"
         }
       ],
       "ResponseHeaders": [
@@ -79465,15 +79465,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1734"
+          "Value": "1345"
         },
         {
           "Name": "ETag",
-          "Value": "\"EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io=\""
+          "Value": "\"E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:16 GMT"
+          "Value": "Sun, 08 Jun 2025 03:19:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79493,13 +79493,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0=\""
+          "Value": "W/\"JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "mefd5x3y3i"
+          "Value": "yecwahwed2"
         },
         {
           "Name": "label",
@@ -79507,12 +79507,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0="
+          "Value": "sha256-JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI="
         }
       ]
     },
     {
-      "Route": "js/login.mefd5x3y3i.js",
+      "Route": "js/login.yecwahwed2.js",
       "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\login.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -79522,7 +79522,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5844"
+          "Value": "3932"
         },
         {
           "Name": "Content-Type",
@@ -79530,11 +79530,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0=\""
+          "Value": "\"JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:16 GMT"
+          "Value": "Sun, 08 Jun 2025 03:19:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79544,7 +79544,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "mefd5x3y3i"
+          "Value": "yecwahwed2"
         },
         {
           "Name": "label",
@@ -79552,13 +79552,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Poj1MDPs40UNWbTrG2yTlwusF72QQQnULM/toJE0Ib0="
+          "Value": "sha256-JktldQTi4uvKnjEYTajjbFJFB1s3jz8A8ru4p5cJMqI="
         }
       ]
     },
     {
-      "Route": "js/login.mefd5x3y3i.js.gz",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-mefd5x3y3i.gz",
+      "Route": "js/login.yecwahwed2.js.gz",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\1b6fcxq1es-yecwahwed2.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -79567,7 +79567,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1734"
+          "Value": "1345"
         },
         {
           "Name": "Content-Type",
@@ -79575,11 +79575,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io=\""
+          "Value": "\"E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:16 GMT"
+          "Value": "Sun, 08 Jun 2025 03:19:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79597,7 +79597,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "mefd5x3y3i"
+          "Value": "yecwahwed2"
         },
         {
           "Name": "label",
@@ -79605,18 +79605,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-EGfZt5jJN6a9v5EbgPDbsrLUj24NPiEjNHdoGqCu9Io="
+          "Value": "sha256-E/ivTLtPqeVvR7P2tC9d7XsH1jBaglIF04dn+BUE5Yk="
         }
       ]
     },
     {
-      "Route": "js/main.d9gb14ig07.js",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-d9gb14ig07.gz",
+      "Route": "js/main.js",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-ns0qmz9g8w.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000203500204"
+          "Quality": "0.000218483723"
         }
       ],
       "ResponseHeaders": [
@@ -79626,19 +79626,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4913"
+          "Value": "4576"
         },
         {
           "Name": "ETag",
-          "Value": "\"z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g=\""
+          "Value": "\"+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:18 GMT"
+          "Value": "Sun, 08 Jun 2025 03:11:53 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -79654,26 +79654,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg=\""
+          "Value": "W/\"h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "d9gb14ig07"
-        },
-        {
-          "Name": "label",
-          "Value": "js/main.js"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg="
+          "Value": "sha256-h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM="
         }
       ]
     },
     {
-      "Route": "js/main.d9gb14ig07.js",
+      "Route": "js/main.js",
       "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\main.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -79683,7 +79675,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "16397"
+          "Value": "14416"
         },
         {
           "Name": "Content-Type",
@@ -79691,11 +79683,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg=\""
+          "Value": "\"h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:18 GMT"
+          "Value": "Sun, 08 Jun 2025 03:11:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM="
+        }
+      ]
+    },
+    {
+      "Route": "js/main.js.gz",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-ns0qmz9g8w.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4576"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 03:11:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg="
+        }
+      ]
+    },
+    {
+      "Route": "js/main.ns0qmz9g8w.js",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-ns0qmz9g8w.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000218483723"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4576"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 03:11:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ns0qmz9g8w"
+        },
+        {
+          "Name": "label",
+          "Value": "js/main.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM="
+        }
+      ]
+    },
+    {
+      "Route": "js/main.ns0qmz9g8w.js",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\main.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14416"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 08 Jun 2025 03:11:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79705,7 +79842,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "d9gb14ig07"
+          "Value": "ns0qmz9g8w"
         },
         {
           "Name": "label",
@@ -79713,13 +79850,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg="
+          "Value": "sha256-h1juOhbXq6o5vwkMijOLAlolP5WuwPrmm8o6SUYyjzM="
         }
       ]
     },
     {
-      "Route": "js/main.d9gb14ig07.js.gz",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-d9gb14ig07.gz",
+      "Route": "js/main.ns0qmz9g8w.js.gz",
+      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-ns0qmz9g8w.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -79728,7 +79865,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4913"
+          "Value": "4576"
         },
         {
           "Name": "Content-Type",
@@ -79736,11 +79873,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g=\""
+          "Value": "\"+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:18 GMT"
+          "Value": "Sun, 08 Jun 2025 03:11:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -79758,7 +79895,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "d9gb14ig07"
+          "Value": "ns0qmz9g8w"
         },
         {
           "Name": "label",
@@ -79766,144 +79903,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g="
-        }
-      ]
-    },
-    {
-      "Route": "js/main.js",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-d9gb14ig07.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000203500204"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4913"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:18 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg="
-        }
-      ]
-    },
-    {
-      "Route": "js/main.js",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\wwwroot\\js\\main.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "16397"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:18 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-EXi7R+9aaiERh84gPfP8fepaWGGY7WeY9/AUF78ShHg="
-        }
-      ]
-    },
-    {
-      "Route": "js/main.js.gz",
-      "AssetFile": "C:\\CLINICARE Proyects\\Visual Studio\\Conta-PosTrax\\Conta-PosTrax\\obj\\Debug\\net9.0\\compressed\\2asrk1mfnf-d9gb14ig07.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4913"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 08 Jun 2025 02:48:18 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-z5GTSKrsplCByNu0uskHeYm+/yzHCfELGtwXRpyV38g="
+          "Value": "sha256-+pLNhpX7ZCfxNtB3trvcvSrzRtTtWCIIoCL2cX60QCg="
         }
       ]
     },

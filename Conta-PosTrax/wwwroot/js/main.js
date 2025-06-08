@@ -143,310 +143,287 @@
             }
         });
     });
-
-
-    /**
-     * Enfoca un elemento de forma confiable en diferentes situaciones
-     * @param {string} elementId - ID del elemento a enfocar
-     */
-    function setAutoFocus(elementId) {
-        // Función interna para enfocar el elemento
-        const focusElement = () => {
-            const element = document.getElementById(elementId);
-            if (element) {
-                element.focus();
-                element.select(); // Opcional: selecciona todo el texto
-            } else {
-                console.warn(`Elemento #${elementId} no encontrado`);
-            }
-        };
-
-        // Enfocar en diferentes momentos para mayor confiabilidad
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', focusElement);
-        } else {
-            focusElement();
-        }
-
-        // Enfocar después de un breve retraso, útil para elementos renderizados dinámicamente
-        setTimeout(focusElement, 300);
-        setTimeout(focusElement, 800);
-        window.addEventListener('load', focusElement);
-    }
-
-    // Convertir a Mayuscula
-    $(document).on('input', '.mayusculas', function () {
-        $(this).val(function (_, val) {
-            return val.toUpperCase();
-        });
-    });
-
-    // Inicio Datatable Bootrap
-    //DECLARACION DE VARIABLES
-    var dom = "<'row'<'col-sm-12 text-center'B>>" + // Botones de acción arriba
-        "<'row mt-3'<'col-sm-3'<'form-inline'l>><'col-sm-6 text-center'f><'col-sm-3'>>" + // Área de búsqueda en el centro con margen superior
-        "<'row'<'col-sm-12'tr>>" + // Tabla
-        "<'row'<'col-sm-12'<'form-inline'i><'float-end'p>>'>"; // Botones de "Mostrar registros" y "Buscar" abajo
-
-
-    var lengthMenu = [
-        [5, 10, 20, 30, 50, 100, -1],
-        [5, 10, 20, 30, 50, 100, "Todo"]
-    ];
-    var lengthMenu10 = [
-        [10, 20, 30, 50, 100, -1],
-        [10, 20, 30, 50, 100, "Todo"]
-    ];
-    var lengthMenu20 = [
-        [20, 30, 50, 100, -1],
-        [20, 30, 50, 100, "Todo"]
-    ];
-
-    //INICIO IDIOMA
-    var idioma_español = {
-        "processing": "Procesando...",
-        "lengthMenu": "Mostrar MENU",
-        "zeroRecords": "No se encontraron resultados",
-        "emptyTable": "Ningún dato disponible en esta tabla",
-        "info": "Mostrando registros del START al END de un total de TOTAL registros",
-        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "infoFiltered": "(filtrado de un total de MAX registros)",
-        "search": "Buscar:",
-        "infoThousands": ",",
-        "loadingRecords": "Cargando...",
-        "paginate": {
-            "first": "Primero",
-            "last": "Último",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        },
-        "aria": {
-            "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-            "sortDescending": ": Activar para ordenar la columna de manera descendente"
-        },
-        "buttons": {
-            "copy": "Copiar",
-            "colvis": "Visibilidad",
-            "collection": "Colección",
-            "colvisRestore": "Restaurar visibilidad",
-            "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-            "copySuccess": {
-                "1": "Copiada 1 fila al portapapeles",
-                "_": "Copiadas %d fila al portapapeles"
-            },
-            "copyTitle": "Copiar al portapapeles",
-            "csv": "CSV",
-            "excel": "Excel",
-            "pageLength": {
-                "-1": "Mostrar todas las filas",
-                "1": "Mostrar 1 fila",
-                "_": "Mostrar %d filas"
-            },
-            "pdf": "PDF",
-            "print": "Imprimir"
-        },
-        "autoFill": {
-            "cancel": "Cancelar",
-            "fill": "Rellene todas las celdas con <i>%d<\/i>",
-            "fillHorizontal": "Rellenar celdas horizontalmente",
-            "fillVertical": "Rellenar celdas verticalmentemente"
-        },
-        "decimal": ",",
-        "searchBuilder": {
-            "add": "Añadir condición",
-            "button": {
-                "0": "Constructor de búsqueda",
-                "_": "Constructor de búsqueda (%d)"
-            },
-            "clearAll": "Borrar todo",
-            "condition": "Condición",
-            "conditions": {
-                "date": {
-                    "after": "Despues",
-                    "before": "Antes",
-                    "between": "Entre",
-                    "empty": "Vacío",
-                    "equals": "Igual a",
-                    "not": "No",
-                    "notBetween": "No entre",
-                    "notEmpty": "No Vacio"
-                },
-                "moment": {
-                    "after": "Despues",
-                    "before": "Antes",
-                    "between": "Entre",
-                    "empty": "Vacío",
-                    "equals": "Igual a",
-                    "not": "No",
-                    "notBetween": "No entre",
-                    "notEmpty": "No vacio"
-                },
-                "number": {
-                    "between": "Entre",
-                    "empty": "Vacio",
-                    "equals": "Igual a",
-                    "gt": "Mayor a",
-                    "gte": "Mayor o igual a",
-                    "lt": "Menor que",
-                    "lte": "Menor o igual que",
-                    "not": "No",
-                    "notBetween": "No entre",
-                    "notEmpty": "No vacío"
-                },
-                "string": {
-                    "contains": "Contiene",
-                    "empty": "Vacío",
-                    "endsWith": "Termina en",
-                    "equals": "Igual a",
-                    "not": "No",
-                    "notEmpty": "No Vacio",
-                    "startsWith": "Empieza con"
-                }
-            },
-            "data": "Data",
-            "deleteTitle": "Eliminar regla de filtrado",
-            "leftTitle": "Criterios anulados",
-            "logicAnd": "Y",
-            "logicOr": "O",
-            "rightTitle": "Criterios de sangría",
-            "title": {
-                "0": "Constructor de búsqueda",
-                "_": "Constructor de búsqueda (%d)"
-            },
-            "value": "Valor"
-        },
-        "searchPanes": {
-            "clearMessage": "Borrar todo",
-            "collapse": {
-                "0": "Paneles de búsqueda",
-                "_": "Paneles de búsqueda (%d)"
-            },
-            "count": "{total}",
-            "countFiltered": "{shown} ({total})",
-            "emptyPanes": "Sin paneles de búsqueda",
-            "loadMessage": "Cargando paneles de búsqueda",
-            "title": "Filtros Activos - %d"
-        },
-        "select": {
-            "1": "%d fila seleccionada",
-            "_": "%d filas seleccionadas",
-            "cells": {
-                "1": "1 celda seleccionada",
-                "_": "$d celdas seleccionadas"
-            },
-            "columns": {
-                "1": "1 columna seleccionada",
-                "_": "%d columnas seleccionadas"
-            }
-        },
-        "thousands": "."
-    }
-    //FIN IDIOMA
-
-    function toDataURL(src, callback, outputFormat) {
-        var img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = function () {
-            var canvas = document.createElement('CANVAS');
-            var ctx = canvas.getContext('2d');
-            var dataURL;
-            canvas.height = this.naturalHeight;
-            canvas.width = this.naturalWidth;
-            ctx.drawImage(this, 0, 0);
-            dataURL = canvas.toDataURL(outputFormat);
-            callback(dataURL);
-        };
-        img.src = src;
-        if (img.complete || img.complete === undefined) {
-            img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-            img.src = src;
-        }
-    }
-
-    var baseUrl = window.location.origin; // Obtiene la URL base del servidor
-    var imagePath = '/img/logo.png'; // Ruta de la imagen relativa a la raíz del servidor
-    var urlmage = baseUrl + imagePath; // Construye la URL completa de la imagen
-
-    function getImagenHeaderConsulta(callback) {
-        // Obtener la URL de la imagen usando Ajax
-        $.ajax({
-            type: "GET",
-            url: urlmage, // Ruta al archivo PHP
-            dataType: 'json',
-            success: imageUrl => {
-                // Llamar a la función de devolución de llamada con la URL de la imagen
-                callback(imageUrl);
-            },
-            error: (xhr, status, error) => {
-                console.error("Error al obtener la URL de la imagen");
-                // Puedes manejar errores aquí también, si es necesario.
-            }
-        });
-    }
-
-    var imagen;
-    getImagenHeaderConsulta(function (imageUrl) {
-        toDataURL(imageUrl, function (dataUrl) {
-            imagen = dataUrl;
-            // Ahora, 'imagen' contiene los datos de la imagen en formato Data URL
-        });
-    });
-    // Fin Datatable Bootrap
-
-    function initializeSelectPickers() {
-        if (typeof $.fn.selectpicker === 'undefined') {
-            console.warn('Bootstrap-select no está cargado');
-            return;
-        }
-
-        var $selects = $('.selectpicker');
-        if ($selects.length) {
-            $selects.selectpicker();
-        }
-    }
-
-    // Llamar la función cuando sea necesario
-    initializeSelectPickers();
-
-    //INICIO FUNCIONES ADICIONALES
-    function convertDateFormat(string) {
-        if (string == null || string == "") {
-            var hoy = new Date();
-            string = convertDate(hoy);
-        }
-
-        var info = string.split('-');
-        return info[2] + '/' + info[1] + '/' + info[0];
-    }
-
-    // Función para agregar separadores de miles
-    const formatNumber = (num) => {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    };
-
-    function convertDate(inputFormat) {
-        function pad(s) {
-            return (s < 10) ? '0' + s : s;
-        }
-        var d = new Date(inputFormat);
-        return [d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())].join('-');
-    }
-
-    function today() {
-        var hoy = new Date();
-        return convertDate(hoy);
-    }
-
-    function getMonth() {
-        const hoy = new Date()
-        return hoy.toLocaleString('default', {
-            month: 'long'
-        });
-    }
-
-    function getDay() {
-        const hoy = new Date().getDate();
-        return hoy;
-    }
-    //FIN FUNCIONES ADICIONALES
 });
+
+function setAutoFocus(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.focus();
+    }
+}
+
+// Convertir a Mayuscula
+$(document).on('input', '.mayusculas', function () {
+    $(this).val(function (_, val) {
+        return val.toUpperCase();
+    });
+});
+
+// Inicio Datatable Bootrap
+//DECLARACION DE VARIABLES
+var dom = "<'row'<'col-sm-12 text-center'B>>" + // Botones de acción arriba
+    "<'row mt-3'<'col-sm-3'<'form-inline'l>><'col-sm-6 text-center'f><'col-sm-3'>>" + // Área de búsqueda en el centro con margen superior
+    "<'row'<'col-sm-12'tr>>" + // Tabla
+    "<'row'<'col-sm-12'<'form-inline'i><'float-end'p>>'>"; // Botones de "Mostrar registros" y "Buscar" abajo
+
+
+var lengthMenu = [
+    [5, 10, 20, 30, 50, 100, -1],
+    [5, 10, 20, 30, 50, 100, "Todo"]
+];
+var lengthMenu10 = [
+    [10, 20, 30, 50, 100, -1],
+    [10, 20, 30, 50, 100, "Todo"]
+];
+var lengthMenu20 = [
+    [20, 30, 50, 100, -1],
+    [20, 30, 50, 100, "Todo"]
+];
+
+//INICIO IDIOMA
+var idioma_español = {
+    "processing": "Procesando...",
+    "lengthMenu": "Mostrar MENU",
+    "zeroRecords": "No se encontraron resultados",
+    "emptyTable": "Ningún dato disponible en esta tabla",
+    "info": "Mostrando registros del START al END de un total de TOTAL registros",
+    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "infoFiltered": "(filtrado de un total de MAX registros)",
+    "search": "Buscar:",
+    "infoThousands": ",",
+    "loadingRecords": "Cargando...",
+    "paginate": {
+        "first": "Primero",
+        "last": "Último",
+        "next": "Siguiente",
+        "previous": "Anterior"
+    },
+    "aria": {
+        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+        "copy": "Copiar",
+        "colvis": "Visibilidad",
+        "collection": "Colección",
+        "colvisRestore": "Restaurar visibilidad",
+        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
+        "copySuccess": {
+            "1": "Copiada 1 fila al portapapeles",
+            "_": "Copiadas %d fila al portapapeles"
+        },
+        "copyTitle": "Copiar al portapapeles",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+            "-1": "Mostrar todas las filas",
+            "1": "Mostrar 1 fila",
+            "_": "Mostrar %d filas"
+        },
+        "pdf": "PDF",
+        "print": "Imprimir"
+    },
+    "autoFill": {
+        "cancel": "Cancelar",
+        "fill": "Rellene todas las celdas con <i>%d<\/i>",
+        "fillHorizontal": "Rellenar celdas horizontalmente",
+        "fillVertical": "Rellenar celdas verticalmentemente"
+    },
+    "decimal": ",",
+    "searchBuilder": {
+        "add": "Añadir condición",
+        "button": {
+            "0": "Constructor de búsqueda",
+            "_": "Constructor de búsqueda (%d)"
+        },
+        "clearAll": "Borrar todo",
+        "condition": "Condición",
+        "conditions": {
+            "date": {
+                "after": "Despues",
+                "before": "Antes",
+                "between": "Entre",
+                "empty": "Vacío",
+                "equals": "Igual a",
+                "not": "No",
+                "notBetween": "No entre",
+                "notEmpty": "No Vacio"
+            },
+            "moment": {
+                "after": "Despues",
+                "before": "Antes",
+                "between": "Entre",
+                "empty": "Vacío",
+                "equals": "Igual a",
+                "not": "No",
+                "notBetween": "No entre",
+                "notEmpty": "No vacio"
+            },
+            "number": {
+                "between": "Entre",
+                "empty": "Vacio",
+                "equals": "Igual a",
+                "gt": "Mayor a",
+                "gte": "Mayor o igual a",
+                "lt": "Menor que",
+                "lte": "Menor o igual que",
+                "not": "No",
+                "notBetween": "No entre",
+                "notEmpty": "No vacío"
+            },
+            "string": {
+                "contains": "Contiene",
+                "empty": "Vacío",
+                "endsWith": "Termina en",
+                "equals": "Igual a",
+                "not": "No",
+                "notEmpty": "No Vacio",
+                "startsWith": "Empieza con"
+            }
+        },
+        "data": "Data",
+        "deleteTitle": "Eliminar regla de filtrado",
+        "leftTitle": "Criterios anulados",
+        "logicAnd": "Y",
+        "logicOr": "O",
+        "rightTitle": "Criterios de sangría",
+        "title": {
+            "0": "Constructor de búsqueda",
+            "_": "Constructor de búsqueda (%d)"
+        },
+        "value": "Valor"
+    },
+    "searchPanes": {
+        "clearMessage": "Borrar todo",
+        "collapse": {
+            "0": "Paneles de búsqueda",
+            "_": "Paneles de búsqueda (%d)"
+        },
+        "count": "{total}",
+        "countFiltered": "{shown} ({total})",
+        "emptyPanes": "Sin paneles de búsqueda",
+        "loadMessage": "Cargando paneles de búsqueda",
+        "title": "Filtros Activos - %d"
+    },
+    "select": {
+        "1": "%d fila seleccionada",
+        "_": "%d filas seleccionadas",
+        "cells": {
+            "1": "1 celda seleccionada",
+            "_": "$d celdas seleccionadas"
+        },
+        "columns": {
+            "1": "1 columna seleccionada",
+            "_": "%d columnas seleccionadas"
+        }
+    },
+    "thousands": "."
+}
+//FIN IDIOMA
+
+function toDataURL(src, callback, outputFormat) {
+    var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function () {
+        var canvas = document.createElement('CANVAS');
+        var ctx = canvas.getContext('2d');
+        var dataURL;
+        canvas.height = this.naturalHeight;
+        canvas.width = this.naturalWidth;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        callback(dataURL);
+    };
+    img.src = src;
+    if (img.complete || img.complete === undefined) {
+        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+        img.src = src;
+    }
+}
+
+var baseUrl = window.location.origin; // Obtiene la URL base del servidor
+var imagePath = '/img/logo.png'; // Ruta de la imagen relativa a la raíz del servidor
+var urlmage = baseUrl + imagePath; // Construye la URL completa de la imagen
+
+function getImagenHeaderConsulta(callback) {
+    // Obtener la URL de la imagen usando Ajax
+    $.ajax({
+        type: "GET",
+        url: urlmage, // Ruta al archivo PHP
+        dataType: 'json',
+        success: imageUrl => {
+            // Llamar a la función de devolución de llamada con la URL de la imagen
+            callback(imageUrl);
+        },
+        error: (xhr, status, error) => {
+            console.error("Error al obtener la URL de la imagen");
+            // Puedes manejar errores aquí también, si es necesario.
+        }
+    });
+}
+
+var imagen;
+getImagenHeaderConsulta(function (imageUrl) {
+    toDataURL(imageUrl, function (dataUrl) {
+        imagen = dataUrl;
+        // Ahora, 'imagen' contiene los datos de la imagen en formato Data URL
+    });
+});
+// Fin Datatable Bootrap
+
+function initializeSelectPickers() {
+    if (typeof $.fn.selectpicker === 'undefined') {
+        console.warn('Bootstrap-select no está cargado');
+        return;
+    }
+
+    var $selects = $('.selectpicker');
+    if ($selects.length) {
+        $selects.selectpicker();
+    }
+}
+
+// Llamar la función cuando sea necesario
+initializeSelectPickers();
+
+//INICIO FUNCIONES ADICIONALES
+function convertDateFormat(string) {
+    if (string == null || string == "") {
+        var hoy = new Date();
+        string = convertDate(hoy);
+    }
+
+    var info = string.split('-');
+    return info[2] + '/' + info[1] + '/' + info[0];
+}
+
+// Función para agregar separadores de miles
+const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+function convertDate(inputFormat) {
+    function pad(s) {
+        return (s < 10) ? '0' + s : s;
+    }
+    var d = new Date(inputFormat);
+    return [d.getFullYear(), pad(d.getMonth() + 1), pad(d.getDate())].join('-');
+}
+
+function today() {
+    var hoy = new Date();
+    return convertDate(hoy);
+}
+
+function getMonth() {
+    const hoy = new Date()
+    return hoy.toLocaleString('default', {
+        month: 'long'
+    });
+}
+
+function getDay() {
+    const hoy = new Date().getDate();
+    return hoy;
+}
+//FIN FUNCIONES ADICIONALES
