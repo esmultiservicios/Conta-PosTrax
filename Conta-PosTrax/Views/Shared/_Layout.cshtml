@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="~/css/all.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/assets/css/style.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/sweetalert.css?v=@(DateTime.Now.Ticks)" />
+    <link rel="stylesheet" href="~/css/sweetalert2.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/css/notyf.min.css?v=@(DateTime.Now.Ticks)" />
 
     @RenderSection("Styles", required: false)
@@ -43,16 +43,21 @@
 
     @* Scripts Plantilla *@
     <script src="~/assets/js/jquery.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/bootstrap.bundle.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/feather.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/js/all.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/apexchart/apexcharts.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/apexchart/chart-data.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/assets/plugins/apexchart/chart-data.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/script.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js?v=@(DateTime.Now.Ticks)" asp-append-version="true"></script>
+    <script src="~/js/sweetalert2.min.js?v=@(DateTime.Now.Ticks)" asp-append-version="true"></script>
     <script src="~/js/notyf.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/js/ToastMessage.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/js/main.js?v=@(DateTime.Now.Ticks)"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -107,7 +107,9 @@ namespace Conta_PosTrax.Controllers
 
                 return Json(new
                 {
-                    success = false,
+                    type = "error",
+                    title = "Error de validación",
+                    message = "Por favor corrige los errores en el formulario",
                     errors = errors
                 });
             }
@@ -126,8 +128,9 @@ namespace Conta_PosTrax.Controllers
                     AppLogger.LogWarning($"Intento de registro con correo existente: {model.Correo}", "Registro");
                     return Json(new
                     {
-                        success = false,
-                        message = "Este correo ya está registrado"
+                        type = "error",
+                        title = "Correo ya registrado",
+                        message = "Este correo electrónico ya está registrado en nuestro sistema"
                     });
                 }
 
@@ -137,7 +140,8 @@ namespace Conta_PosTrax.Controllers
                     AppLogger.LogWarning("Contraseña demasiado corta", "Registro", null, new { Longitud = model.Password.Length });
                     return Json(new
                     {
-                        success = false,
+                        type = "error",
+                        title = "Contraseña insegura",
                         message = "La contraseña debe tener al menos 6 caracteres"
                     });
                 }
@@ -146,15 +150,12 @@ namespace Conta_PosTrax.Controllers
                 string hashedPassword = _dataAccess.Encrypt.EncryptString(model.Password);
                 AppLogger.LogDebug("Contraseña encriptada exitosamente", "Registro");
 
-                // 4. Insertar en transacción
-                await _dataAccess.ExecuteNonQuery("BEGIN TRANSACTION");
-
-                // 4.1 Insertar usuario
+                // 4. Insertar usuario y obtener ID en una sola operación
                 string nombreUsuario = model.Correo.Split('@')[0];
-                await _dataAccess.ExecuteNonQuery(
+                int userId = await _dataAccess.ExecuteInsertWithIdentity(
                     @"INSERT INTO [Seguridad].[Usuarios] 
                         (Usuario, Correo, Password, Status, RolId)
-                        VALUES (@Usuario, @Correo, @Password, 1, 2)",
+                    VALUES (@Usuario, @Correo, @Password, 1, 2)",
                     new Dictionary<string, object>
                     {
                         { "@Usuario", nombreUsuario },
@@ -162,45 +163,50 @@ namespace Conta_PosTrax.Controllers
                         { "@Password", hashedPassword }
                     });
 
-                // 4.2 Obtener ID del nuevo usuario
-                var userId = await _dataAccess.ExecuteScalarAsync("SELECT SCOPE_IDENTITY()");
-
-                if (userId == null)
+                if (userId <= 0)
                 {
-                    AppLogger.LogError("No se pudo obtener ID de usuario durante registro", null, "Registro");
                     throw new InvalidOperationException("No se pudo obtener el ID del usuario creado");
                 }
 
-                // 4.3 Insertar empleado
-                await _dataAccess.ExecuteNonQuery(
+                // 5. Insertar empleado
+                bool empleadoInsertado = await _dataAccess.ExecuteNonQuery(
                     @"INSERT INTO [RRHH].[Empleados]
-                    (UsuarioId, Nombre, Apellido, FechaIngreso, Estado)
-                    VALUES (@UsuarioId, @Nombre, @Apellido, GETDATE(), 1)",
+                        (UsuarioId, Nombre, Apellido, FechaIngreso, Estado, Genero, CreadoPor)
+                    VALUES (@UsuarioId, @Nombre, @Apellido, GETDATE(), 1, @Genero, @CreadoPor)",
                     new Dictionary<string, object>
                     {
                         { "@UsuarioId", userId },
                         { "@Nombre", model.Nombre },
-                        { "@Apellido", model.Apellido }
+                        { "@Apellido", model.Apellido },
+                        { "@Genero", "O" }, // Valor por defecto
+                        { "@CreadoPor", userId }
                     });
 
-                await _dataAccess.ExecuteNonQuery("COMMIT TRANSACTION");
+                if (!empleadoInsertado)
+                {
+                    throw new InvalidOperationException("No se pudo crear el registro de empleado");
+                }
 
                 AppLogger.LogInformation($"Registro exitoso para: {model.Correo}", "Registro", nombreUsuario);
                 return Json(new
                 {
-                    success = true,
-                    redirectUrl = Url.Action("Login", "Home")
+                    type = "success",
+                    title = "¡Registro exitoso!",
+                    message = "Tu cuenta ha sido creada correctamente",
+                    redirectUrl = Url.Action("Login", "", new { email = model.Correo })
                 });
             }
             catch (Exception ex)
             {
-                await _dataAccess.ExecuteNonQuery("IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION");
                 AppLogger.LogError("Error en registro", ex, "Registro", null, new { Correo = model.Correo });
                 _logger.LogError(ex, "Error en registro");
+
                 return Json(new
                 {
-                    success = false,
-                    message = "Error interno al registrar: " + ex.Message
+                    type = "error",
+                    title = "Error en el registro",
+                    message = "Ocurrió un error inesperado al procesar tu registro. Por favor intenta nuevamente.",
+                    Correo = model.Correo
                 });
             }
         }
@@ -221,7 +227,9 @@ namespace Conta_PosTrax.Controllers
                 return Json(new
                 {
                     success = false,
-                    message = "Por favor complete todos los campos",
+                    type = "error",
+                    title = "Error de validación",
+                    message = "Complete todos los campos correctamente",
                     errors = errors
                 });
             }
@@ -230,14 +238,15 @@ namespace Conta_PosTrax.Controllers
             {
                 AppLogger.LogDebug($"Intento de login: {model.Usuario}", "Login");
 
-                string query = @"SELECT 
+                string query = @"
+                SELECT 
                     u.[Id],
                     u.[Usuario],
                     u.[Correo],
                     u.[Password],
                     u.[Status],
                     r.[Id] AS RolId,
-                    r.[Nombre] AS Rol,
+                    r.[Rol],
                     e.[Nombre],
                     e.[Apellido]
                 FROM [Seguridad].[Usuarios] u
@@ -281,9 +290,12 @@ namespace Conta_PosTrax.Controllers
                 if (!passwordValid)
                 {
                     AppLogger.LogWarning("Contraseña inválida", "Login", row["Usuario"]?.ToString());
+
                     return Json(new
                     {
                         success = false,
+                        type = "error",
+                        title = "Credenciales inválidas",
                         message = "Usuario/Correo o contraseña incorrectos"
                     });
                 }
@@ -298,18 +310,23 @@ namespace Conta_PosTrax.Controllers
                 };
 
                 await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(new ClaimsIdentity(claims)),
+                    new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)),
                     new AuthenticationProperties
                     {
                         IsPersistent = false,
-                        ExpiresUtc = DateTime.UtcNow.AddHours(8)
-                    });
+                        ExpiresUtc = DateTime.UtcNow.AddMinutes(30)
+                    }
+                );
 
                 AppLogger.LogInformation($"Login exitoso para: {model.Usuario}", "Login", row["Usuario"]?.ToString());
+
+                // Login exitoso
                 return Json(new
                 {
                     success = true,
+                    type = "success",
+                    title = "¡Bienvenido!",
+                    message = "Autenticación exitosa",
                     redirectUrl = Url.Action("Index", "Dashboard")
                 });
             }
@@ -317,10 +334,13 @@ namespace Conta_PosTrax.Controllers
             {
                 AppLogger.LogError("Error en login", ex, "Login", null, new { Usuario = model.Usuario });
                 _logger.LogError(ex, "Error en login");
+
                 return Json(new
                 {
                     success = false,
-                    message = "Error interno del servidor. Intente nuevamente."
+                    type = "error",
+                    title = "Error interno",
+                    message = $"Ocurrió un error al procesar su solicitud {ex.Message}"
                 });
             }
         }

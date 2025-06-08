@@ -1,4 +1,5 @@
-﻿// Configuración mejorada de Notyf con botón de cierre
+﻿//ToastMessage.js
+// Configuración mejorada de Notyf con botón de cierre
 const notyf = new Notyf({
     duration: 3000,
     position: {
@@ -76,6 +77,21 @@ const notyf = new Notyf({
         }
     ]
 });
+
+// Variable global para controlar la notificación de carga
+let loadingNotification = null;
+
+/**
+ * Muestra una notificación de carga
+ * @param {string} message - Mensaje a mostrar durante la carga
+ */
+function showLoading(message = "Procesando, por favor espere...") {
+    // Mostrar nueva notificación
+    loadingNotification = notyf.open({
+        type: 'loading',
+        message: message
+    });
+}
 
 /**
  * Muestra una notificación estilizada usando Notyf.

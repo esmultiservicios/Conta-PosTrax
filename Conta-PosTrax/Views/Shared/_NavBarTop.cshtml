@@ -1,8 +1,22 @@
-﻿<div class="header header-one">
+﻿@using System.Security.Claims
+@{
+    var nombreCompleto = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value ?? "Usuario";
+    var rol = User.FindFirst(ClaimTypes.Role)?.Value ?? "Sin Rol";
+    var correo = User.FindFirst(ClaimTypes.Email)?.Value ?? "Sin Correo";
+
+    // Extraer primer nombre y primer apellido
+    var partesNombre = nombreCompleto.Split(' ');
+    var nombreMostrar = partesNombre.Length > 0 ? partesNombre[0] : nombreCompleto;
+    var apellidoMostrar = partesNombre.Length > 1 ? partesNombre[partesNombre.Length - 1] : "";
+    var nombreCorto = $"{nombreMostrar} {apellidoMostrar}";
+}
+
+<div class="header header-one">
     <div class="header-left header-left-one">
         <a href="index.html" class="logo">
             <img src="assets/img/logo.png" alt="Logo">
         </a>
+        <a href="index.html" class="white-logo">
         <a href="index.html" class="white-logo">
             <img src="assets/img/logo-white.png" alt="Logo">
         </a>
@@ -170,20 +184,25 @@
                     <img src="assets/img/profiles/avatar-01.jpg" alt="">
                     <span class="status online"></span>
                 </span>
-                <span>Admin</span>
+                <span>@nombreCorto</span>
+                <span class="badge bg-primary ms-2">@rol</span>
             </a>
             <div class="dropdown-menu">
+                <div class="dropdown-header">
+                    <h6>Bienvenido, @nombreCompleto</h6>
+                    <small>Correo: @correo</small>
+                </div>
                 <a class="dropdown-item" href="profile.html">
                     <i data-feather="user" class="me-1"></i>
-                    Profile
+                    Perfil
                 </a>
                 <a class="dropdown-item" href="settings.html">
                     <i data-feather="settings" class="me-1"></i>
-                    Settings
+                    Configuración
                 </a>
-                <a class="dropdown-item" href="login.html">
+                <a class="dropdown-item" href="#" id="logoutLink">
                     <i data-feather="log-out" class="me-1"></i>
-                    Logout
+                    Cerrar Sesión
                 </a>
             </div>
         </li>

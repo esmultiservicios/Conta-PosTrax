@@ -1,0 +1,30 @@
+﻿/* Efecto de resaltado para errores */
+.error-highlight {
+    border-color: #ff3860 !important;
+    box-shadow: 0 0 0 2px rgba(255, 56, 96, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Efecto shake */
+.shake-effect {
+    animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20%, 60% {
+        transform: translateX(-10px);
+    }
+
+    40%, 80% {
+        transform: translateX(10px);
+    }
+}
+
+#LoginAction[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
