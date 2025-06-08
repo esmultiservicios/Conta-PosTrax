@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Conta-PosTrax")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5be39753aad55534538b758ce6330eaf8b07464a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0332d6bf5b9c7a94a5863c0e2afb2493018265a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Conta-PosTrax")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Conta-PosTrax")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

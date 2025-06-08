@@ -5428,13 +5428,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.vwd22m2d51.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-EZMgFFidKh\u002B6fbq2l7rzT7sLENAUjzvhouoEETh8vIw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5686"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022EZMgFFidKh\u002B6fbq2l7rzT7sLENAUjzvhouoEETh8vIw=\u0022"},{"Name":"Last-Modified","Value":"Sun, 08 Jun 2025 02:48:53 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5686"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022EZMgFFidKh\u002B6fbq2l7rzT7sLENAUjzvhouoEETh8vIw=\u0022"},{"Name":"Last-Modified","Value":"Sun, 08 Jun 2025 22:19:37 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/Conta-PosTrax.vwd22m2d51.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Conta-PosTrax.vwd22m2d51.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"vwd22m2d51"},{"Name":"integrity","Value":"sha256-EZMgFFidKh\u002B6fbq2l7rzT7sLENAUjzvhouoEETh8vIw="},{"Name":"label","Value":"_content/Conta-PosTrax/Conta-PosTrax.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5686"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022EZMgFFidKh\u002B6fbq2l7rzT7sLENAUjzvhouoEETh8vIw=\u0022"},{"Name":"Last-Modified","Value":"Sun, 08 Jun 2025 02:48:53 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5686"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022EZMgFFidKh\u002B6fbq2l7rzT7sLENAUjzvhouoEETh8vIw=\u0022"},{"Name":"Last-Modified","Value":"Sun, 08 Jun 2025 22:19:37 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Conta-PosTrax/css/login.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\login.css'))</AssetFile>
