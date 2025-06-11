@@ -402,6 +402,21 @@ namespace Conta_PosTrax.Controllers
             });
         }
 
+        [HttpGet("api/userinfo")]
+        [Authorize]
+        public IActionResult GetUserInfo()
+        {
+            return Json(new
+            {
+                isAuthenticated = true,  // Siempre será true porque el [Authorize] protege el endpoint
+                UsuarioId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+                Name = User.FindFirst(ClaimTypes.Name)?.Value,
+                Correo = User.FindFirst("Correo")?.Value,
+                Rol = User.FindFirst(ClaimTypes.Role)?.Value
+                //rolId = User.FindFirst("RolId")?.Value
+            });
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

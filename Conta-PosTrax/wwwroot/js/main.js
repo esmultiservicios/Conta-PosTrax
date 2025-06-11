@@ -17,11 +17,10 @@
                 if (response.isAuthenticated) {
                     // Crear objeto unificado una sola vez
                     const userData = {
-                        id: response.usuarioId,
-                        nombre: response.nombre,
-                        gafete: response.gafete,
-                        rol: response.rol,
-                        rolId: response.rolId,
+                        id: response.UsuarioId,
+                        Name: response.Name,
+                        Correo: response.Correo,
+                        Rol: response.Rol,
                         isAuthenticated: true
                     };
 
@@ -42,14 +41,14 @@
     // Función para actualizar dinámicamente la información del usuario
     function updateNavbarUserInfo(userData) {
         try {
-            if (!userData || !userData.nombre) {
+            if (!userData || !userData.Name) {
                 console.error('Datos de usuario inválidos');
                 return;
             }
 
             // Extraer primer nombre y apellido de forma segura
             const nombreParts = (userData.nombre || '').trim().split(/\s+/);
-            let nombreCorto = userData.nombre;
+            let nombreCorto = userData.Name;
 
             if (nombreParts.length > 1) {
                 nombreCorto = `${nombreParts[0]} ${nombreParts[nombreParts.length - 1]}`;
@@ -81,16 +80,15 @@
 
     function updateUserUI(userData) {
         $('#nombreMostrado').html(`
-        <strong>${userData.nombre}</strong> (Gafete: ${userData.gafete})
-        <span class="badge bg-primary ms-2">${userData.rol}</span>
+        <strong>${userData.Name}</strong> (Correo: ${userData.Correo})
+        <span class="badge bg-primary ms-2">${userData.Rolk}</span>
     `);
 
         window.currentUser = {
             id: userData.usuarioId,
-            name: userData.nombre,
-            badge: userData.gafete,
-            role: userData.rol,
-            roleId: userData.rolId
+            name: userData.Name,
+            badge: userData.Correo,
+            role: userData.Rol
         };
     }
 
@@ -159,13 +157,6 @@ $(document).on('input', '.mayusculas', function () {
     });
 });
 
-// Inicio Datatable Bootrap
-//DECLARACION DE VARIABLES
-var dom = "<'row'<'col-sm-12 text-center'B>>" + // Botones de acción arriba
-    "<'row mt-3'<'col-sm-3'<'form-inline'l>><'col-sm-6 text-center'f><'col-sm-3'>>" + // Área de búsqueda en el centro con margen superior
-    "<'row'<'col-sm-12'tr>>" + // Tabla
-    "<'row'<'col-sm-12'<'form-inline'i><'float-end'p>>'>"; // Botones de "Mostrar registros" y "Buscar" abajo
-
 
 var lengthMenu = [
     [5, 10, 20, 30, 50, 100, -1],
@@ -180,15 +171,15 @@ var lengthMenu20 = [
     [20, 30, 50, 100, "Todo"]
 ];
 
-//INICIO IDIOMA
+// Configuración COMPLETA del lenguaje en español
 var idioma_español = {
     "processing": "Procesando...",
-    "lengthMenu": "Mostrar MENU",
+    "lengthMenu": "Mostrar _MENU_ registros",
     "zeroRecords": "No se encontraron resultados",
     "emptyTable": "Ningún dato disponible en esta tabla",
-    "info": "Mostrando registros del START al END de un total de TOTAL registros",
+    "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
     "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de MAX registros)",
+    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
     "search": "Buscar:",
     "infoThousands": ",",
     "loadingRecords": "Cargando...",
@@ -210,7 +201,7 @@ var idioma_español = {
         "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
         "copySuccess": {
             "1": "Copiada 1 fila al portapapeles",
-            "_": "Copiadas %d fila al portapapeles"
+            "_": "Copiadas %d filas al portapapeles"
         },
         "copyTitle": "Copiar al portapapeles",
         "csv": "CSV",
@@ -222,103 +213,16 @@ var idioma_español = {
         },
         "pdf": "PDF",
         "print": "Imprimir"
-    },
-    "autoFill": {
-        "cancel": "Cancelar",
-        "fill": "Rellene todas las celdas con <i>%d<\/i>",
-        "fillHorizontal": "Rellenar celdas horizontalmente",
-        "fillVertical": "Rellenar celdas verticalmentemente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-            "date": {
-                "after": "Despues",
-                "before": "Antes",
-                "between": "Entre",
-                "empty": "Vacío",
-                "equals": "Igual a",
-                "not": "No",
-                "notBetween": "No entre",
-                "notEmpty": "No Vacio"
-            },
-            "moment": {
-                "after": "Despues",
-                "before": "Antes",
-                "between": "Entre",
-                "empty": "Vacío",
-                "equals": "Igual a",
-                "not": "No",
-                "notBetween": "No entre",
-                "notEmpty": "No vacio"
-            },
-            "number": {
-                "between": "Entre",
-                "empty": "Vacio",
-                "equals": "Igual a",
-                "gt": "Mayor a",
-                "gte": "Mayor o igual a",
-                "lt": "Menor que",
-                "lte": "Menor o igual que",
-                "not": "No",
-                "notBetween": "No entre",
-                "notEmpty": "No vacío"
-            },
-            "string": {
-                "contains": "Contiene",
-                "empty": "Vacío",
-                "endsWith": "Termina en",
-                "equals": "Igual a",
-                "not": "No",
-                "notEmpty": "No Vacio",
-                "startsWith": "Empieza con"
-            }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-        "clearMessage": "Borrar todo",
-        "collapse": {
-            "0": "Paneles de búsqueda",
-            "_": "Paneles de búsqueda (%d)"
-        },
-        "count": "{total}",
-        "countFiltered": "{shown} ({total})",
-        "emptyPanes": "Sin paneles de búsqueda",
-        "loadMessage": "Cargando paneles de búsqueda",
-        "title": "Filtros Activos - %d"
-    },
-    "select": {
-        "1": "%d fila seleccionada",
-        "_": "%d filas seleccionadas",
-        "cells": {
-            "1": "1 celda seleccionada",
-            "_": "$d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        }
-    },
-    "thousands": "."
-}
+    }
+};
+
+// Configuración del DOM para DataTables
+let dom = `
+    <"row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>
+    <"row"<"col-sm-12"tr>>
+    <"row mt-3"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>
+    <"row"<"col-sm-12"B>>
+`;
 //FIN IDIOMA
 
 function toDataURL(src, callback, outputFormat) {
@@ -425,5 +329,27 @@ function getMonth() {
 function getDay() {
     const hoy = new Date().getDate();
     return hoy;
+}
+
+// Formatear moneda
+function formatCurrency(value) {
+    if (value === null || value === undefined) return '--';
+    return new Intl.NumberFormat('es-HN', {
+        style: 'currency',
+        currency: 'HNL'
+    }).format(value);
+}
+
+// Formatear fecha
+function formatDate(dateString) {
+    if (!dateString) return '--';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-HN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
 }
 //FIN FUNCIONES ADICIONALES

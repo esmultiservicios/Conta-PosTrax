@@ -3,6 +3,9 @@
 2. Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 3. BCrypt.Net-N
 4. Newtonsoft.Json
+5. Microsoft.EntityFrameworkCore
+6. Microsoft.EntityFrameworkCore.Relational
+7. Microsoft.EntityFrameworkCore.SqlServer
 
 ##########Ignore Files##########
 .vs/

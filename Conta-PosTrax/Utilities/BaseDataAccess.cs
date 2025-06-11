@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using DBase_Operations;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Conta_PosTrax.Utilities
 {
@@ -58,15 +59,12 @@ namespace Conta_PosTrax.Utilities
     /// </summary>
     public class BaseDataAccess : IBaseDataAccess
     {
-        private const string servidor = "154.38.186.111";
-        private const string baseDeDatos = "Conta_PosTrax";
-        private const string usuario = "sa";
-        private const string contrasena = "*>R*Bg?GqZ,3YvS";
+        private readonly string _connectionString;
 
         /// <summary>
         /// Instancia de bajo nivel para operaciones con la base de datos MULTIFAST
         /// </summary>
-        public MSSQLServerLowLevel _dataMULTIFAST { get; } = new MSSQLServerLowLevel(servidor, baseDeDatos, usuario, contrasena);
+        public MSSQLServerLowLevel _dataMULTIFAST { get; }
 
         /// <summary>
         /// Servicio de encriptación para proteger datos sensibles
@@ -74,9 +72,22 @@ namespace Conta_PosTrax.Utilities
         public Encrypt Encrypt { get; } = new Encrypt();
 
         /// <summary>
-        /// Cadena de conexión para la base de datos MULTIFAST
+        /// Constructor que recibe la configuración para obtener el connection string
         /// </summary>
-        public static string db_MULTIFAST = $"Server={servidor};Database={baseDeDatos};User Id={usuario};Password={contrasena};Encrypt=false;TrustServerCertificate=True;";
+        /// <param name="configuration">Interfaz de configuración de la aplicación</param>
+        public BaseDataAccess(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("DefaultConnection") ??
+                throw new ArgumentNullException("No se encontró la cadena de conexión 'DefaultConnection' en la configuración");
+
+            // Inicializa _dataMULTIFAST con los valores del connection string
+            var builder = new SqlConnectionStringBuilder(_connectionString);
+            _dataMULTIFAST = new MSSQLServerLowLevel(
+                builder.DataSource,
+                builder.InitialCatalog,
+                builder.UserID,
+                builder.Password);
+        }
 
         /// <summary>
         /// Ejecuta una consulta que no devuelve resultados (INSERT, UPDATE, DELETE)
@@ -86,7 +97,7 @@ namespace Conta_PosTrax.Utilities
         /// <returns>True si la operación afectó al menos una fila, False en caso contrario o si ocurrió un error</returns>
         public async Task<bool> ExecuteNonQuery(string query, Dictionary<string, object>? parameters = null)
         {
-            using (var connection = new SqlConnection(db_MULTIFAST))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 try
                 {
@@ -97,7 +108,6 @@ namespace Conta_PosTrax.Utilities
                         {
                             foreach (var param in parameters)
                             {
-                                // Mejor manejo de parámetros
                                 var sqlParam = new SqlParameter(param.Key, param.Value ?? DBNull.Value);
                                 command.Parameters.Add(sqlParam);
                             }
@@ -124,7 +134,7 @@ namespace Conta_PosTrax.Utilities
         /// <exception cref="Exception">Se lanza cuando ocurre un error durante la ejecución de la consulta</exception>
         public async Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object>? parameters = null)
         {
-            using (var connection = new SqlConnection(db_MULTIFAST))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 try
                 {
@@ -164,7 +174,7 @@ namespace Conta_PosTrax.Utilities
         /// <returns>El valor de la primera columna de la primera fila en el conjunto de resultados, o null si no hay resultados</returns>
         public async Task<object?> ExecuteScalarAsync(string query, Dictionary<string, object>? parameters = null)
         {
-            using (var connection = new SqlConnection(db_MULTIFAST))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
                 using (var command = new SqlCommand(query, connection))
@@ -191,17 +201,15 @@ namespace Conta_PosTrax.Utilities
         /// <exception cref="Exception">Se lanza cuando ocurre un error durante la ejecución de la consulta</exception>
         public async Task<int> ExecuteInsertWithIdentity(string query, Dictionary<string, object> parameters)
         {
-            using (var connection = new SqlConnection(db_MULTIFAST))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
                 using (var transaction = connection.BeginTransaction())
                 {
                     try
                     {
-                        // Versión mejorada que usa OUTPUT INSERTED
                         string modifiedQuery = query;
 
-                        // Si no termina en punto y coma, agregarlo
                         if (!query.TrimEnd().EndsWith(";"))
                             modifiedQuery += ";";
 
@@ -214,7 +222,6 @@ namespace Conta_PosTrax.Utilities
                                 command.Parameters.Add(new SqlParameter(param.Key, param.Value ?? DBNull.Value));
                             }
 
-                            // Ejecutar y obtener el ID directamente
                             var result = await command.ExecuteScalarAsync();
                             await transaction.CommitAsync();
 
