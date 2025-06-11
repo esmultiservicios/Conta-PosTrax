@@ -180,7 +180,7 @@ var idioma_español = {
     "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
     "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
     "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
+    "search": '<i class="fas fa-search"></i>',
     "infoThousands": ",",
     "loadingRecords": "Cargando...",
     "paginate": {
@@ -217,12 +217,10 @@ var idioma_español = {
 };
 
 // Configuración del DOM para DataTables
-let dom = `
-    <"row mb-3"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>
-    <"row"<"col-sm-12"tr>>
-    <"row mt-3"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>
-    <"row"<"col-sm-12"B>>
-`;
+var dom = "<'row'<'col-sm-12 text-center'B>>" + // Botones de acción arriba
+    "<'row mt-3'<'col-sm-3'<'form-inline'l>><'col-sm-6 text-center'f><'col-sm-3'>>" + // Área de búsqueda en el centro con margen superior
+    "<'row'<'col-sm-12'tr>>" + // Tabla
+    "<'row'<'col-sm-12'<'form-inline'i><'float-end'p>>'>"; // Botones de "Mostrar registros" y "Buscar" abajo
 //FIN IDIOMA
 
 function toDataURL(src, callback, outputFormat) {
@@ -351,5 +349,24 @@ function formatDate(dateString) {
         hour: '2-digit',
         minute: '2-digit'
     });
+}
+
+// Función para validar email
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Función para validar RTN (formato básico)
+function isValidRTN(rtn) {
+    // Implementar validación específica según requisitos
+    return true; // Cambiar según necesidades
+}
+
+function formatCurrency(value) {
+    if (value === null || value === undefined || isNaN(value)) {
+        return 'L 0.00';
+    }
+    return 'L ' + parseFloat(value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
 //FIN FUNCIONES ADICIONALES

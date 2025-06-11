@@ -10,7 +10,10 @@ function editContact(id) {
             $('#editContactEmail').val(data.email);
             $('#editContactEsPrincipal').prop('checked', data.esPrincipal);
 
-            $('#editContactModal').modal('show');
+            $('#editContactModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
         })
         .catch(error => {
             Swal.fire('Error', 'No se pudo cargar la información del contacto', 'error');

@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <Reference Include="SQL_Operations2">
-      <HintPath>..\..\Dlls\SQL_Operations2.dll</HintPath>
+      <HintPath>..\..\dll\SQL_Operations2.dll</HintPath>
     </Reference>
   </ItemGroup>
 

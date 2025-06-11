@@ -41,7 +41,7 @@ namespace Conta_PosTrax.Services
 	                                LEFT JOIN [Seguridad].[Permisos] p 
 		                                ON m.Id = p.MenuId 
 	                                INNER JOIN [Seguridad].[Roles] r 
-		                                ON p.RolId = r.Id AND r.id=1--r.Rol =  @Rol
+		                                ON p.RolId = r.Id AND r.Rol =  @Rol
                                 WHERE m.Activo = 1 AND m.MenuId IS NULL
                                 ORDER BY m.Orden";
 
