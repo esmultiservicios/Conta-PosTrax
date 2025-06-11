@@ -37,18 +37,16 @@ namespace Conta_PosTrax.Controllers
                     u.Correo,
                     u.Status AS Activo,
                     r.Id AS RolId,
-                    r.Nombre AS RolNombre,
+                    r.Rol AS RolNombre,
                     e.Id AS EmpleadoId,
                     e.Nombre,
                     e.Apellido,
                     e.FechaIngreso,
                     e.FotoURL
-                FROM   
-                    [Seguridad].[Usuarios] u
+                FROM  [Seguridad].[Usuarios] u
                 INNER JOIN [Seguridad].[Roles] r ON u.RolId = r.Id
                 INNER JOIN [RRHH].[Empleados] e ON u.Id = e.UsuarioId
-                WHERE 
-                    u.Id = @UsuarioId";
+                WHERE u.Id = @UsuarioId";
 
                 var parameters = new Dictionary<string, object> { { "@UsuarioId", id } };
 

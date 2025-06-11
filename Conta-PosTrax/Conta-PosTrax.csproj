@@ -18,13 +18,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="SQL_Operations2">
-      <HintPath>..\..\dll\SQL_Operations2.dll</HintPath>
-    </Reference>
+    <Folder Include="Views\Supplier\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Supplier\" />
+    <Reference Include="SQL_Operations2">
+      <HintPath>..\..\Dlls\SQL_Operations2.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
