@@ -1,316 +1,232 @@
 ﻿$(function () {
-    let clientesTable = null;
-
-    // Inicializar DataTable con diseño mejorado
-    function initializeClientesTable() {
-        if ($.fn.DataTable.isDataTable('#clientesTable')) {
-            $('#clientesTable').DataTable().destroy();
-        }
-
-        // Configuración simplificada del DOM
-        clientesTable = $('#clientesTable').DataTable({
-            responsive: true,
-            language: idioma_español,
-            pageLength: 10,
-            lengthMenu: lengthMenu10,
-            processing: true,
-            serverSide: false,
-            ajax: {
-                url: '/Customer/GetCustomers',
-                type: 'GET',
-                data: function (d) {
-                    return {
-                        codigo: $('#filterCodigo').val() || null,
-                        nombre: $('#filterNombre').val() || null,
-                        rtn: $('#filterRTN').val() || null,
-                        email: $('#filterEmail').val() || null
-                    };
-                },
-                dataSrc: function (json) {
-                    return json && json.data ? json.data : [];
+    // Configuración específica para clientes
+    const clientesConfig = {
+        entity: 'Customer',
+        url: '/Customer/GetCustomers',
+        filters: ['Codigo', 'Nombre', 'RTN', 'Email'],
+        columns: [
+            {
+                data: 'Codigo',
+                className: 'align-middle',
+                width: '100px',
+                render: function (data) {
+                    return data || '--';
                 }
             },
-            columns: [
-                {
-                    data: 'Codigo',
-                    className: 'align-middle',
-                    render: function (data) { return data || '--'; }
-                },
-                {
-                    data: 'Nombre',
-                    className: 'align-middle',
-                    render: function (data, type, row) {
-                        return data ? `<a href="/Customer/Details/${row.Id || ''}" class="text-primary">${data}</a>` : '--';
-                    }
-                },
-                {
-                    data: 'RTN',
-                    className: 'align-middle',
-                    render: function (data) { return data || '--'; }
-                },
-                {
-                    data: 'Telefono',
-                    className: 'align-middle',
-                    render: function (data) { return data || '--'; }
-                },
-                {
-                    data: 'Email',
-                    className: 'align-middle',
-                    render: function (data) {
-                        return data ? `<a href="mailto:${data}" class="text-primary">${data}</a>` : '--';
-                    }
-                },
-                {
-                    data: 'Balance',
-                    className: 'text-end align-middle',
-                    render: function (data) {
-                        const amount = parseFloat(data) || 0;
-                        const colorClass = amount < 0 ? 'text-danger' : 'text-success';
-                        return `<span class="${colorClass} fw-bold">${formatCurrency(data)}</span>`;
-                    }
-                },
-                {
-                    data: 'CreatedAt',
-                    className: 'align-middle',
-                    render: function (data) { return formatDate(data); }
-                },
-                {
-                    data: 'Id',
-                    className: 'text-end align-middle',
-                    orderable: false,
-                    render: function (data) {
-                        return `
-                            <div class="dropdown dropdown-action">
-                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end shadow">
-                                    <a class="dropdown-item" href="/Customer/Details/${data}">
-                                        <i class="far fa-eye me-2 text-info"></i>Detalles
-                                    </a>
-                                    <a class="dropdown-item" href="/Customer/EditCustomer/${data}">
-                                        <i class="far fa-edit me-2 text-primary"></i>Editar
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item btn-delete text-danger" href="#" data-id="${data}">
-                                        <i class="far fa-trash-alt me-2"></i>Eliminar
-                                    </a>
-                                </div>
-                            </div>
-                        `;
-                    }
+            {
+                data: 'Nombre',
+                className: 'align-middle',
+                width: '200px',
+                render: function (data, type, row) {
+                    return data ? `<a href="/Customer/Details/${row.Id}" class="text-primary fw-medium">${data}</a>` : '--';
                 }
-            ],
-            "buttons": [
-                {
-                    text: '<i class="fas fa-sync-alt fa-lg"></i> Actualizar',
-                    titleAttr: 'Actualizar Usuarios',
-                    className: 'btn btn-info',
-                    action: () => GetUsers()
-                },
-                {
-                    text: '<i class="fas fas fa-plus fa-lg crear"></i> Crear',
-                    titleAttr: 'Registrar Usuarios',
-                    className: 'btn btn-primary',
-                    action: () => ModalUsers()
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel fa-lg"></i> Excel',
-                    titleAttr: 'Excel',
-                    title: 'Reporte Usuarios',
-                    exportOptions: {
-                        columns: ':visible'  // Solo exporta las columnas visibles
-                    },
-                    className: 'table_reportes btn btn-success ocultar'
-                },
-                {
-                    extend: 'pdf',
-                    text: '<i class="fas fa-file-pdf fa-lg"></i> PDF',
-                    titleAttr: 'PDF',
-                    title: 'Reporte Usuarios',
-                    messageTop: 'Fecha desde: ' + convertDateFormat(today()) + ' Fecha hasta: ' +
-                        convertDateFormat(today()),
-                    messageBottom: 'Fecha de Reporte: ' + convertDateFormat(today()),
-                    className: 'table_reportes btn btn-danger ocultar',
-                    exportOptions: {
-                        columns: ':visible'  // Solo exporta las columnas visibles
-                    }
-                },
-                'colvis'
-            ],
-            initComplete: function () {
-                // Personalizar el buscador
-                $('.dataTables_filter input')
-                    .addClass('form-control form-control-sm')
-                    .attr('placeholder', 'Buscar clientes...');
-
-                $('.dataTables_filter label').contents().filter(function () {
-                    return this.nodeType === 3;
-                }).remove();
-
-                // Personalizar el buscador
-                $('.dataTables_filter input').addClass('form-control form-control-sm');
-                $('.dataTables_filter label').contents().filter(function () {
-                    return this.nodeType === 3;
-                }).remove();
-
-                // Añadir margen inferior a la tabla
-                $('#clientesTable_wrapper').addClass('mb-4');
+            },
+            {
+                data: 'RTN',
+                className: 'align-middle',
+                width: '150px',
+                render: function (data) {
+                    return data || '--';
+                }
+            },
+            {
+                data: 'Telefono',
+                className: 'align-middle',
+                width: '120px',
+                render: function (data) {
+                    return data || '--';
+                }
+            },
+            {
+                data: 'Email',
+                className: 'align-middle',
+                width: '200px',
+                render: function (data) {
+                    return data ? `<a href="mailto:${data}" class="text-primary">${data}</a>` : '--';
+                }
+            },
+            {
+                data: 'Balance',
+                className: 'text-end align-middle',
+                width: '120px',
+                render: function (data) {
+                    const amount = parseFloat(data) || 0;
+                    const colorClass = amount < 0 ? 'text-danger' : 'text-success';
+                    return `<span class="${colorClass} fw-bold">${formatCurrency(data)}</span>`;
+                }
+            },
+            {
+                data: 'CreatedAt',
+                className: 'align-middle',
+                width: '150px',
+                render: function (data) {
+                    return formatDate(data);
+                }
+            },
+            {
+                data: 'Id',
+                className: 'text-end align-middle',
+                orderable: false,
+                searchable: false,
+                width: '100px'
             }
-        });
-    }
+        ],
+        buttons: [
+            {
+                text: '<i class="fas fa-sync-alt fa-lg"></i> Actualizar',
+                titleAttr: 'Actualizar Clientes',
+                className: 'btn btn-info btn-sm me-2',
+                action: function (e, dt, node, config) {
+                    dt.ajax.reload(null, false);
+                }
+            },
+            {
+                text: '<i class="fas fa-plus fa-lg"></i> Nuevo Cliente',
+                titleAttr: 'Registrar Cliente',
+                className: 'btn btn-primary btn-sm me-2',
+                action: function () {
+                    window.location.href = '/Customer/Create';
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fas fa-file-excel fa-lg"></i> Excel',
+                titleAttr: 'Exportar a Excel',
+                title: 'Reporte de Clientes',
+                className: 'btn btn-success btn-sm me-2',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="fas fa-file-pdf fa-lg"></i> PDF',
+                titleAttr: 'Exportar a PDF',
+                title: 'Reporte de Clientes',
+                className: 'btn btn-danger btn-sm me-2',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6]
+                },
+                customize: function (doc) {
+                    doc.styles.title = {
+                        color: '#2c3e50',
+                        fontSize: '18',
+                        alignment: 'center',
+                        margin: [0, 0, 0, 10]
+                    };
+                    doc.styles.tableHeader = {
+                        bold: true,
+                        fontSize: 10,
+                        color: 'white',
+                        fillColor: '#3498db',
+                        alignment: 'center'
+                    };
+                }
+            },
+            {
+                extend: 'colvis',
+                text: '<i class="fas fa-columns fa-lg"></i> Columnas',
+                titleAttr: 'Mostrar/Ocultar Columnas',
+                className: 'btn btn-secondary btn-sm'
+            }
+        ],
+        customActions: [
+            {
+                type: 'details',
+                url: (id) => `/Customer/Details/${id}`,
+                text: 'Ver detalles',
+                iconClass: 'far fa-eye',
+                textClass: 'text-info'
+            },
+            {
+                type: 'edit',
+                url: (id) => `/Customer/EditCustomer/${id}`,
+                text: 'Modificar cliente',
+                iconClass: 'far fa-edit',
+                textClass: 'text-primary'
+            },
+            {
+                type: 'divider'
+            },
+            {
+                type: 'custom',
+                url: (id, row) => `mailto:${row.Email}?subject=Contacto desde sistema&body=Estimado/a ${row.Nombre},`,
+                text: 'Enviar correo',
+                iconClass: 'fas fa-envelope',
+                textClass: 'text-warning',
+                attrs: 'target="_blank"'
+            },
+            {
+                type: 'custom',
+                url: (id) => `/Customer/Statement/${id}`,
+                text: 'Estado de cuenta',
+                iconClass: 'fas fa-file-invoice-dollar',
+                textClass: 'text-success'
+            },
+            {
+                type: 'divider'
+            },
+            {
+                type: 'delete',
+                text: 'Eliminar',
+                iconClass: 'far fa-trash-alt',
+                textClass: 'text-danger',
+                className: 'btn-delete',
+                attrs: 'data-confirm="¿Está seguro de eliminar este cliente?"'
+            }
+        ]
+    };
 
-    // Manejar eliminación de cliente
-    $(document).on('click', '.btn-delete', function (e) {
-        e.preventDefault();
-        const id = $(this).data('id');
+    // Inicializar la tabla
+    const dataTable = DTHelper.init('#clientesTable', clientesConfig);
 
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "¡No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar',
-            buttonsStyling: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Mostrar loading
+    // Eventos adicionales específicos para clientes
+    $('#filterCodigo, #filterNombre, #filterRTN, #filterEmail').on('keyup change', function () {
+        dataTable.ajax.reload();
+    });
+
+    $(document).on('click', '#clearFilters', function () {
+        $('#filterCodigo, #filterNombre, #filterRTN, #filterEmail').val('');
+        dataTable.ajax.reload();
+    });
+
+    $(document).on('click', '#clientesTable a[href^="mailto:"]', function (e) {
+        const email = $(this).attr('href').replace('mailto:', '').split('?')[0];
+
+        if (!email || email === '') {
+            e.preventDefault();
+            if (window.Swal) {
                 Swal.fire({
-                    title: 'Eliminando...',
-                    text: 'Por favor espera',
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    willOpen: () => {
-                        Swal.showLoading();
-                    }
+                    icon: 'warning',
+                    title: 'Email no disponible',
+                    text: 'Este cliente no tiene email registrado'
                 });
-
-                $.ajax({
-                    url: `/Customer/Delete/${id}`,
-                    type: 'POST',
-                    headers: {
-                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
-                    },
-                    success: function (response) {
-                        showNotify('success', '¡Eliminado!', 'El cliente ha sido eliminado correctamente.');
-
-                        // Recargar tabla sin resetear paginación
-                        if (clientesTable) {
-                            clientesTable.ajax.reload(null, false);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        let errorMessage = 'Ocurrió un error al intentar eliminar el cliente.';
-
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        } else if (xhr.responseText) {
-                            errorMessage = xhr.responseText;
-                        }
-
-                        showNotify('error', 'Error', errorMessage);
-                    }
-                });
+            } else {
+                alert('Este cliente no tiene email registrado');
             }
-        });
+        }
     });
 
-    // Manejar eliminación de cliente
-    $(document).on('click', '.btn-delete', function (e) {
-        e.preventDefault();
-        const id = $(this).data('id');
-        const nombre = $(this).data('nombre');
-        const rtn = $(this).data('rtn');
+    // Función para recargar tabla desde otros lugares
+    window.reloadClientesTable = function () {
+        if (dataTable) {
+            dataTable.ajax.reload(null, false);
+        }
+    };
 
-        Swal.fire({
-            title: '¿Estás seguro de eliminar este cliente?',
-            html: `
-                <div class="text-start">
-                    <p class="mb-2"><strong>Nombre:</strong> ${nombre}</p>
-                    <p><strong>RTN:</strong> ${rtn}</p>
-                    <div class="alert alert-danger mt-3">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        ¡Esta acción no se puede deshacer!
-                    </div>
-                </div>
-            `,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: '<i class="fas fa-trash-alt me-2"></i> Sí, eliminar',
-            cancelButtonText: '<i class="fas fa-times me-2"></i> Cancelar',
-            buttonsStyling: true,
-            reverseButtons: true,
-            focusCancel: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Mostrar loading
-                Swal.fire({
-                    title: 'Eliminando cliente...',
-                    html: `
-                        <div class="text-center">
-                            <div class="spinner-border text-primary mb-3" role="status">
-                                <span class="visually-hidden">Cargando...</span>
-                            </div>
-                            <p>Por favor espere mientras eliminamos el registro</p>
-                        </div>
-                    `,
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    willOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                $.ajax({
-                    url: `/Customer/Delete/${id}`,
-                    type: 'POST',
-                    headers: {
-                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
-                    },
-                    success: function (response) {
-                         showNotify('error', '¡Eliminado!', `El cliente "${nombre}" ha sido eliminado correctamente.`);
-
-                        // Recargar tabla sin resetear paginación
-                        if (clientesTable) {
-                            clientesTable.ajax.reload(null, false);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        let errorMessage = 'Ocurrió un error al intentar eliminar el cliente.';
-
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        } else if (xhr.responseText) {
-                            errorMessage = xhr.responseText;
-                        }
-
-                        Swal.fire({
-                            title: 'Error',
-                            html: `
-                                <div class="text-start">
-                                    <p>No se pudo eliminar el cliente:</p>
-                                    <p class="fw-bold">${nombre}</p>
-                                    <p class="text-danger mt-2">${errorMessage}</p>
-                                </div>
-                            `,
-                            icon: 'error',
-                            confirmButtonText: 'Entendido'
-                        });
-                    }
-                });
-            }
-        });
+    // Manejar redimensionamiento de ventana y cambios en el sidebar
+    $(window).on('resize', function () {
+        if (dataTable) {
+            DTHelper.adjustTableWidth();
+        }
     });
 
-
-    // Inicializar cuando el DOM esté listo
-    $(function () {
-        initializeClientesTable();
+    // Si tienes un botón para ocultar/mostrar el sidebar
+    $(document).on('click', '[data-bs-toggle="sidebar"]', function () {
+        setTimeout(function () {
+            DTHelper.adjustTableWidth();
+        }, 300); // Ajustar después de la animación del sidebar
     });
+
+    console.log('Tabla de clientes inicializada:', dataTable ? 'OK' : 'ERROR');
 });

@@ -8,6 +8,51 @@
         .ToList() ?? new List<Conta_PosTrax.Models.MenuModel>();
 }
 
+<style>
+    .sidebar-menu ul li a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .sidebar-menu ul li a i {
+            width: 20px;
+            text-align: center;
+        }
+
+    /* Transiciones rápidas para el submenú */
+    .sidebar-menu .submenu ul {
+        display: none;
+        overflow: hidden;
+    }
+
+    .sidebar-menu .submenu.active ul {
+        display: block;
+        animation: quickFadeIn 0.15s ease-out;
+    }
+
+    .sidebar-menu .submenu .menu-arrow {
+        transition: transform 0.15s ease-out;
+    }
+
+    .sidebar-menu .submenu.active .menu-arrow {
+        transform: rotate(90deg);
+    }
+
+    /* Animación muy rápida */
+    @@keyframes quickFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
 @if (!menusFiltrados.Any())
 {
     <div class="sidebar" id="sidebar">
@@ -61,7 +106,7 @@ else
 
                             @if (tieneSubmenus)
                             {
-                                <ul>
+                                <ul style="@(esActivo ? "display: block;" : "")">
                                     @foreach (var subMenu in subMenusValidos)
                                     {
                                         <li class="@(!string.IsNullOrEmpty(subMenu.Url) && subMenu.Url == Context.Request.Path ? "active" : "")">
@@ -85,37 +130,21 @@ else
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Manejar estado activo y clics
-            const currentPath = window.location.pathname;
-
-            // Función para expandir/colapsar submenús
-            function toggleSubmenu(submenuElement) {
-                if (!submenuElement) return;
-
-                const isShowing = submenuElement.style.display === 'block';
-                submenuElement.style.display = isShowing ? 'none' : 'block';
-                submenuElement.parentElement.classList.toggle('active', !isShowing);
-            }
-
-            // Manejar submenús activos
-            document.querySelectorAll('.submenu ul li.active').forEach(activeItem => {
-                const parentSubmenu = activeItem.closest('.submenu');
-                if (parentSubmenu) {
-                    const submenuUl = parentSubmenu.querySelector('ul');
-                    if (submenuUl) {
-                        submenuUl.style.display = 'block';
-                        parentSubmenu.classList.add('active');
-                    }
-                }
-            });
-
             // Manejar clics en elementos con submenú
             document.querySelectorAll('.submenu > a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const submenu = this.parentElement.querySelector('ul');
-                    toggleSubmenu(submenu);
+                    const submenu = this.parentElement;
+                    submenu.classList.toggle('active');
                 });
+            });
+
+            // Inicializar submenús activos basados en la URL
+            document.querySelectorAll('.submenu ul li.active').forEach(activeItem => {
+                const parentSubmenu = activeItem.closest('.submenu');
+                if (parentSubmenu) {
+                    parentSubmenu.classList.add('active');
+                }
             });
         });
     </script>
