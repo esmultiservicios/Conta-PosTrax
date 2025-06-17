@@ -19,7 +19,7 @@
                     const userData = {
                         id: response.UsuarioId,
                         Name: response.Name,
-                        Correo: response.Correo,
+                        Correo: response.Email,
                         Rol: response.Rol,
                         isAuthenticated: true
                     };
@@ -104,8 +104,7 @@
             confirmButtonColor: '#e74c3c',
             cancelButtonColor: '#3498db',
             confirmButtonText: '¡Sí, salir! 🚪',
-            cancelButtonText: 'No, mejor no 🙈',
-            backdrop: `rgba(0,0,123,0.4) left top no-repeat`
+            cancelButtonText: 'No, mejor no 🙈'
         }).then((result) => {
             if (result.isConfirmed) {
                 const $logoutLink = $('#logoutLink');
@@ -223,55 +222,68 @@ var dom = "<'row'<'col-sm-12 text-center'B>>" + // Botones de acción arriba
     "<'row'<'col-sm-12'<'form-inline'i><'float-end'p>>'>"; // Botones de "Mostrar registros" y "Buscar" abajo
 //FIN IDIOMA
 
-function toDataURL(src, callback, outputFormat) {
-    var img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = function () {
-        var canvas = document.createElement('CANVAS');
-        var ctx = canvas.getContext('2d');
-        var dataURL;
-        canvas.height = this.naturalHeight;
-        canvas.width = this.naturalWidth;
-        ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
-        callback(dataURL);
-    };
-    img.src = src;
-    if (img.complete || img.complete === undefined) {
-        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-        img.src = src;
+// Versión CORREGIDA y CONFIRMADA para tu estructura exacta
+async function loadHeaderLogo() {
+    // Ruta ABSOLUTAMENTE CORRECTA para tu caso
+    const logoDataURL = await getImageDataURL('/assets/img/logo.png');
+
+    if (logoDataURL.startsWith('data:image')) {
+        console.log('Logo convertido a DataURL:', logoDataURL.substring(0, 50) + '...');
+    } else {
+        console.error('Error inesperado con el logo');
+    }
+    return logoDataURL;
+}
+
+// Función mejorada con verificación EXTRA
+async function getImageDataURL(imagePath) {
+    // Paso 1: Verificación de ruta ABSOLUTA
+    const absolutePath = imagePath.startsWith('http') ? imagePath
+        : `${window.location.origin}${imagePath}`;
+
+    try {
+        // Paso 2: Doble verificación con fetch
+        const response = await fetch(absolutePath, { method: 'HEAD' });
+        if (!response.ok) throw new Error('No encontrado');
+
+        // Paso 3: Conversión segura
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                canvas.width = this.naturalWidth;
+                canvas.height = this.naturalHeight;
+                canvas.getContext('2d').drawImage(this, 0, 0);
+                resolve(canvas.toDataURL('image/png'));
+            };
+            img.onerror = () => resolve(getDefaultImage());
+            img.src = absolutePath;
+        });
+    } catch (error) {
+        console.warn(`Fallo al cargar ${imagePath}:`, error.message);
+        return getDefaultImage();
     }
 }
 
-var baseUrl = window.location.origin; // Obtiene la URL base del servidor
-var imagePath = '/img/logo.png'; // Ruta de la imagen relativa a la raíz del servidor
-var urlmage = baseUrl + imagePath; // Construye la URL completa de la imagen
-
-function getImagenHeaderConsulta(callback) {
-    // Obtener la URL de la imagen usando Ajax
-    $.ajax({
-        type: "GET",
-        url: urlmage, // Ruta al archivo PHP
-        dataType: 'json',
-        success: imageUrl => {
-            // Llamar a la función de devolución de llamada con la URL de la imagen
-            callback(imageUrl);
-        },
-        error: (xhr, status, error) => {
-            console.error("Error al obtener la URL de la imagen");
-            // Puedes manejar errores aquí también, si es necesario.
-        }
-    });
+function getDefaultImage() {
+    // Imagen transparente de 1px como fallback
+    return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 }
 
-var imagen;
-getImagenHeaderConsulta(function (imageUrl) {
-    toDataURL(imageUrl, function (dataUrl) {
-        imagen = dataUrl;
-        // Ahora, 'imagen' contiene los datos de la imagen en formato Data URL
-    });
+// USO CORRECTO (implementación completa)
+document.addEventListener('DOMContentLoaded', async () => {
+    const logoURL = await loadHeaderLogo();
+
+    // Verificación EXTRA en consola
+    const imgCheck = new Image();
+    imgCheck.onload = () => console.log('Logo VERIFICADO en DOM');
+    imgCheck.onerror = () => console.error('Logo FALLÓ en DOM');
+    imgCheck.src = '/assets/img/logo.png'; // Misma ruta que en HTML
+
+    // Aquí puedes usar logoURL para lo que necesites
+    window.appHeaderImage = logoURL;
 });
-// Fin Datatable Bootrap
 
 function initializeSelectPickers() {
     if (typeof $.fn.selectpicker === 'undefined') {

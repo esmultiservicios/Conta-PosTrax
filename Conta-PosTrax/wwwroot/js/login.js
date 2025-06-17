@@ -16,6 +16,15 @@
         }
     }
 
+    // Función para efecto de shake
+    function shakeForm() {
+        const $form = $('#LoginForm');
+        $form.addClass('shake-animation');
+        setTimeout(() => {
+            $form.removeClass('shake-animation');
+        }, 500);
+    }
+
     // Ejecutar inicialización
     initializeLogin();
 
@@ -37,7 +46,10 @@
         e.preventDefault();
 
         // Validar el formulario antes de enviar
-        if (!$(this).valid()) return false;
+        if (!$(this).valid()) {
+            shakeForm();
+            return false;
+        }
 
         const $form = $(this);
         const $submitBtn = $form.find('button[type="submit"]');
@@ -60,6 +72,7 @@
                     window.location.href = response.redirectUrl;
                 } else if (response.message) {
                     showNotify(response.type || 'error', response.title || 'Error', response.message);
+                    shakeForm();
                 }
             },
             error: function (xhr) {
@@ -75,6 +88,7 @@
                     errorResponse.title || 'Error',
                     errorResponse.message || 'Error en la conexión'
                 );
+                shakeForm();
             },
             complete: function () {
                 $submitBtn.html(originalBtnText).prop('disabled', false);
@@ -100,6 +114,7 @@
             },
             highlight: function (element) {
                 $(element).addClass('is-invalid');
+                shakeForm();
             },
             unhighlight: function (element) {
                 $(element).removeClass('is-invalid');
@@ -107,3 +122,22 @@
         });
     }
 });
+
+// Función para el efecto de shake (debe agregarse en tu CSS)
+function addShakeAnimation() {
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .shake-animation {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Agregar la animación al cargar
+addShakeAnimation();

@@ -25,6 +25,9 @@ namespace Conta_PosTrax.Controllers
             _logger = logger;
             _dataAccess = dataAccess;
             _context = context;
+
+            // Inicializa SampleData una sola vez
+            SampleData.Init(_dataAccess);
         }
 
         // ==============================================
@@ -91,6 +94,23 @@ namespace Conta_PosTrax.Controllers
                 .ToListAsync();
 
             return View(clientes);
+
+            // Opción con Entity Framework - más limpio y mantenible
+            //var clientes = await _context.Clientes
+            //    .OrderBy(c => c.Nombre)
+            //    .Select(c => new Cliente // Proyección para seleccionar solo los campos necesarios
+            //    {
+            //        Id = c.Id,
+            //        Codigo = c.Codigo,
+            //        Nombre = c.Nombre,
+            //        RTN = c.RTN,
+            //        Direccion = c.Direccion
+            //        // Solo incluye los campos que necesitas en la vista
+            //    })
+            //    .AsNoTracking() // Mejor rendimiento para operaciones de solo lectura
+            //    .ToListAsync();
+
+            //return View(clientes);
         }
 
         [HttpGet("AddCustomer")]

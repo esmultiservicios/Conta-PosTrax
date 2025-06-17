@@ -1,11 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Clientes";
-}
-
-@section Scripts {
-    <script src="~/js/Customer.js?v=@DateTime.Now.Ticks"></script>
-}
-
+﻿@model List<Cliente>
 <div class="page-header">
     <div class="row align-items-center">
         <div class="col">
@@ -14,7 +7,8 @@
                 <li class="breadcrumb-item">
                     <a href="/">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Clientes</li>
+                <li class="breadcrumb-item active">Cliente
+                    s</li>
             </ul>
         </div>
         <div class="col-auto">
@@ -24,37 +18,6 @@
             <a class="btn btn-primary filter-btn" href="javascript:void(0);" id="filter_search">
                 <i class="fas fa-filter"></i> Filtrar
             </a>
-        </div>
-    </div>
-</div>
-
-<div id="filter_inputs" class="card filter-card">
-    <div class="card-body pb-0">
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                    <label>Código</label>
-                    <input type="text" class="form-control" id="filterCodigo">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" class="form-control" id="filterNombre">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                    <label>RTN</label>
-                    <input type="text" class="form-control" id="filterRTN">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" id="filterEmail">
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -78,6 +41,51 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach (var cliente in Model)
+                            {
+                                <tr>
+                                    <td>@cliente.Codigo</td>
+                                    <td>@cliente.Nombre</td>
+                                    <td>@cliente.RTN</td>
+                                    <td>@cliente.Telefono</td>
+                                    <td>@cliente.Email</td>
+                                    <td>@(cliente.Balance?.ToString("C") ?? "$0.00")</td>
+                                    <td>@(cliente.CreatedAt?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                    <td class="text-end">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-custom">
+                                                <a class="dropdown-item" href="@Url.Action("Details", "Customer", new { id = cliente.Id })">
+                                                    <i class="far fa-eye me-2 text-info"></i>
+                                                    <span>Detalles</span>
+                                                </a>
+                                                <a class="dropdown-item" href="@Url.Action("EditCustomer", "Customer", new { id = cliente.Id })">
+                                                    <i class="far fa-edit me-2 text-primary"></i>
+                                                    <span>Editar</span>
+                                                </a>
+                                                @if (!string.IsNullOrEmpty(cliente.Email))
+                                                {
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="mailto:@cliente.Email?subject=Contacto desde sistema" target="_blank">
+                                                        <i class="fas fa-envelope me-2 text-warning"></i>
+                                                        <span>Enviar correo</span>
+                                                    </a>
+                                                }
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item btn-delete text-danger" href="#"
+                                                   data-id="@cliente.Id"
+                                                   data-name="@cliente.Nombre"
+                                                   data-codigo="@cliente.Codigo">
+                                                    <i class="far fa-trash-alt me-2"></i>
+                                                    <span>Eliminar</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -85,3 +93,203 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+<!-- Script para manejar eliminación con SweetAlert -->
+<script>
+    $(document).ready(function() {
+        // Inicializar dropdowns con configuración específica
+        var dropdowns = document.querySelectorAll('.dropdown-toggle');
+        dropdowns.forEach(function(dropdownToggle) {
+            var dropdownMenu = dropdownToggle.nextElementSibling;
+
+            new bootstrap.Dropdown(dropdownToggle, {
+                popperConfig: {
+                    modifiers: [
+                        {
+                            name: 'flip',
+                            enabled: false // Desactiva el comportamiento de ajuste automático
+                        },
+                        {
+                            name: 'preventOverflow',
+                            options: {
+                                boundary: document.body
+                            }
+                        }
+                    ]
+                }
+            });
+        });
+
+        $('.btn-delete').click(function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            var codigo = $(this).data('codigo');
+
+            Swal.fire({
+                title: '¿Eliminar cliente?',
+                html: `<p>Está a punto de eliminar al cliente:</p>
+                       <p><strong>${codigo} - ${name}</strong></p>
+                       <p class="text-danger">Esta acción no se puede deshacer</p>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                backdrop: `
+                    rgba(0,0,0,0.7)
+                    url("/images/trash-icon.png")
+                    center top
+                    no-repeat
+                `,
+                width: '600px',
+                padding: '3em',
+                customClass: {
+                    popup: 'animated fadeIn faster'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Mostrar loader mientras se procesa
+                    Swal.fire({
+                        title: 'Eliminando...',
+                        html: 'Por favor espere',
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        },
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                    });
+
+                    // Hacer la petición AJAX
+                    $.post('@Url.Action("Delete", "Customer")', { id: id })
+                        .done(function(response) {
+                            if(response.success) {
+                                Swal.fire({
+                                    title: '¡Eliminado!',
+                                    text: `El cliente ${name} ha sido eliminado`,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Error',
+                                    response.message || 'Ocurrió un error al eliminar',
+                                    'error'
+                                );
+                            }
+                        })
+                        .fail(function() {
+                            Swal.fire(
+                                'Error',
+                                'No se pudo completar la solicitud',
+                                'error'
+                            );
+                        });
+                }
+            });
+        });
+    });
+</script>
+}
+
+@* <div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @(Html.DevExtreme().DataGrid<Cliente>()
+                        .ID("clientesGrid")
+                        .ElementAttr(new { @class = "dx-card wide-card" })
+                        .DataSource(Model)
+                        .ShowBorders(false)
+                        .FilterRow(f => f.Visible(true))
+                        .FocusedRowEnabled(true)
+                        .ColumnAutoWidth(true)
+                        .Columns(columns =>
+                        {
+                            columns.AddFor(m => m.Codigo)
+                                .Caption("Código")
+                                .Width(100);
+
+                            columns.AddFor(m => m.Nombre)
+                                .Caption("Nombre");
+
+                            columns.AddFor(m => m.RTN)
+                                .Caption("RTN")
+                                .Width(120);
+
+                            columns.Add()
+                                .Type(GridCommandColumnType.Buttons)
+                                .Width(180)
+                                .Buttons(b =>
+                                {
+                                    b.Add()
+                                        .Name("details")
+                                        .Icon("info")
+                                        .Hint("Ver detalles")
+                                        .OnClick("showDetails");
+
+                                    b.Add()
+                                        .Name("edit")
+                                        .Icon("edit")
+                                        .Hint("Editar")
+                                        .OnClick("editRecord");
+
+                                    b.Add()
+                                        .Name("delete")
+                                        .Icon("trash")
+                                        .Hint("Eliminar")
+                                        .OnClick("deleteRecord");
+                                });
+                        })
+                        .Paging(p => p.PageSize(10)))
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+@* @section Scripts {
+    <script>
+        function showDetails(e) {
+            const data = e.row.data;
+            window.location.href = `@Url.Action("Details", "Customer")/${data.Id}`;
+        }
+
+        function editRecord(e) {
+            const data = e.row.data;
+            window.location.href = `@Url.Action("EditCustomer", "Customer")/${data.Id}`;
+        }
+
+        function deleteRecord(e) {
+            const data = e.row.data;
+            DevExpress.ui.dialog.confirm(
+                `¿Está seguro de eliminar al cliente ${data.Nombre}?`,
+                "Confirmar eliminación"
+            ).then(function(dialogResult) {
+                if (dialogResult) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Customer")',
+                        type: 'POST',
+                        data: { id: data.Id },
+                        success: function() {
+                            const grid = $("#clientesGrid").dxDataGrid("instance");
+                            grid.refresh();
+                            DevExpress.ui.notify("Cliente eliminado correctamente", "success", 2000);
+                        },
+                        error: function() {
+                            DevExpress.ui.notify("Error al eliminar el cliente", "error", 2000);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+} *@

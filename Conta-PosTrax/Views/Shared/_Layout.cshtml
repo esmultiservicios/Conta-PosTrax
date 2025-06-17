@@ -4,16 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Conta-PosTrax</title>
-    <script type="importmap"></script>
 
-    @* CSS Plantilla *@
+    @* CSS Base *@
     <link rel="stylesheet" href="~/assets/css/bootstrap.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/assets/plugins/fontawesome/css/fontawesome.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/assets/plugins/fontawesome/css/all.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/assets/plugins/select2/css/select2.min.css?v=@(DateTime.Now.Ticks)" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-select.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/assets/plugins/datatables/datatables.min.css?v=@(DateTime.Now.Ticks)" />
+
+    @* DevExtreme CSS *@
+    <link rel="stylesheet" href="~/css/devextreme/dx.light.css?v=@(DateTime.Now.Ticks)" />
+
+    @* CSS Personalizado *@
     <link rel="stylesheet" href="~/assets/css/style.css?v=@(DateTime.Now.Ticks)" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css?v=@(DateTime.Now.Ticks)" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sweetalert2.min.css?v=@(DateTime.Now.Ticks)" />
     <link rel="stylesheet" href="~/css/notyf.min.css?v=@(DateTime.Now.Ticks)" />
 
@@ -24,7 +29,7 @@
         @* NavBarTop *@
         @await Html.PartialAsync("_NavBarTop")
 
-        @* NavBarTop *@
+        @* NavBarLateral *@
         @await Html.PartialAsync("_NavBarLateral")
 
         <div class="page-wrapper">
@@ -34,29 +39,33 @@
                 </main>
             </div>
         </div>
-
-        @*
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2025 - Conta-PosTrax - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer> 
-        *@
     </div>
 
-    @* Scripts Plantilla *@
+    @* Scripts Base - ORDEN CRÍTICO *@
+    <script src="~/js/devextreme/jquery.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/jquery.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/js/bootstrap.bundle.min.js?v=@(DateTime.Now.Ticks)"></script>
+
+    @* DevExtreme Scripts *@
+    <script src="~/js/devextreme/dx.all.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.data.js?v=@(DateTime.Now.Ticks)"></script>
+
+    @* Scripts para gráficos y otros *@
     <script src="~/assets/js/feather.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/select2/js/select2.min.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-select.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/apexchart/apexcharts.min.js?v=@(DateTime.Now.Ticks)"></script>
-    <script src="~/assets/plugins/apexchart/chart-data.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/apexchart/chart-data.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/datatables/jquery.dataTables.min.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/assets/plugins/datatables/datatables.min.js?v=@(DateTime.Now.Ticks)"></script>
+
+    @* Scripts de validación *@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js?v=@(DateTime.Now.Ticks)"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js?v=@(DateTime.Now.Ticks)"></script>
+
+    @* Scripts Personalizados *@
     <script src="~/assets/js/script.js?v=@(DateTime.Now.Ticks)"></script>
     <script src="~/js/site.js?v=@(DateTime.Now.Ticks)" asp-append-version="true"></script>
     <script src="~/js/sweetalert2.min.js?v=@(DateTime.Now.Ticks)" asp-append-version="true"></script>

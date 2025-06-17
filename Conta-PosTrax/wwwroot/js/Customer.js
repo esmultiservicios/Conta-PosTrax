@@ -1,7 +1,7 @@
 ﻿$(function () {
     // Configuración específica para clientes
     const clientesConfig = {
-        entity: 'Customer',
+        entity: 'Customer',//Controlador
         url: '/Customer/GetCustomers',
         filters: ['Codigo', 'Nombre', 'RTN', 'Email'],
         columns: [

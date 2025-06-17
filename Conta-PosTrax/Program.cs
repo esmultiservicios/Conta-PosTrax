@@ -49,7 +49,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.SameSite = SameSiteMode.Lax;
         options.Cookie.SecurePolicy = isDevelopment ? CookieSecurePolicy.None : CookieSecurePolicy.SameAsRequest;
         options.Cookie.HttpOnly = true;
-        options.Cookie.Name = "HEDS.Auth";
+        options.Cookie.Name = "Conta.Auth";
     });
 
 // 5. Configuración de políticas de cookies

@@ -19,7 +19,7 @@ namespace Conta_PosTrax.Data
         public new void Remove<TEntity>(TEntity entity) where TEntity : class => base.Remove(entity);
 
         public new async Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class
-            => await base.FindAsync<TEntity>(keyValues);
+            => (await base.FindAsync<TEntity>(keyValues))!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,0 +1,3 @@
+﻿@using Conta_PosTrax
+@using Conta_PosTrax.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

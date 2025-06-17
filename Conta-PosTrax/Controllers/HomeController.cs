@@ -409,7 +409,7 @@ namespace Conta_PosTrax.Controllers
                 isAuthenticated = true,  // Siempre será true porque el [Authorize] protege el endpoint
                 UsuarioId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value,
                 Name = User.FindFirst(ClaimTypes.Name)?.Value,
-                Correo = User.FindFirst("Correo")?.Value,
+                Correo = User.FindFirst(ClaimTypes.Email)?.Value,
                 Rol = User.FindFirst(ClaimTypes.Role)?.Value
                 //rolId = User.FindFirst("RolId")?.Value
             });
