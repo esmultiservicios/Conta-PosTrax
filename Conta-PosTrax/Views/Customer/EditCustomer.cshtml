@@ -1,418 +1,454 @@
 ﻿@model Conta_PosTrax.Models.Cliente
 
 @{
-    ViewData["Title"] = "Editar Cliente";
+	ViewData["Title"] = "Editar Cliente";
 }
 
 @section Scripts {
-    <script src="~/js/EditCustomer.js?v=@DateTime.Now.Ticks"></script>
+	<script src="~/js/EditCustomer.js?v=@DateTime.Now.Ticks"></script>
 }
 
 <div class="page-header">
-    <div class="row align-items-center">
-        <div class="col">
-            <h3 class="page-title">@ViewData["Title"]</h3>
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="/Customer">Clientes</a></li>
-                <li class="breadcrumb-item active">Editar Cliente</li>
-            </ul>
-        </div>
-        <div class="col-auto">
-            <a href="/Customer" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Volver
-            </a>
-        </div>
-    </div>
+	<div class="row align-items-center">
+		<div class="col">
+			<h3 class="page-title">@ViewData["Title"]</h3>
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+				<li class="breadcrumb-item"><a href="/Customer">Clientes</a></li>
+				<li class="breadcrumb-item active">Editar Cliente</li>
+			</ul>
+		</div>
+		<div class="col-auto">
+			<a href="/Customer" class="btn btn-secondary">
+				<i class="fas fa-arrow-left"></i> Volver
+			</a>
+		</div>
+	</div>
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Información Básica</h4>
-                <form id="editCustomerForm">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" asp-for="Id" id="Id" />
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Información Básica</h4>
+				<form id="editCustomerForm"
+					  asp-controller="Customer"
+					  asp-action="EditCustomer"
+					  asp-route-id="@Model.Id"
+					  method="post">
+					@Html.AntiForgeryToken()
+					<input type="hidden" asp-for="Id" id="Id" />
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Codigo">Código</label>
-                                <input type="text" class="form-control" asp-for="Codigo" id="Codigo">
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Nombre">Nombre *</label>
-                                <input type="text" class="form-control mayusculas" asp-for="Nombre" id="Nombre" required>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="RTN">RTN</label>
-                                <input type="text" class="form-control" asp-for="RTN" id="RTN">
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="TipoEntidad">Tipo de Entidad</label>
-                                <select class="form-control" asp-for="TipoEntidad" id="TipoEntidad">
-                                    <option value="">Seleccione...</option>
-                                    <option value="C">Compañía</option>
-                                    <option value="G">Gobierno</option>
-                                    <option value="I">Individual</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Tipo">Tipo</label>
-                                <select class="form-control" asp-for="Tipo" id="Tipo">
-                                    <option value="C">Cliente</option>
-                                    <option value="S">Proveedor</option>
-                                    <option value="L">Lead</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="Telefono">Teléfono *</label>
-                                <input type="text" class="form-control" asp-for="Telefono" id="Telefono" required>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Telefono2">Teléfono 2</label>
-                                <input type="text" class="form-control" asp-for="Telefono2" id="Telefono2">
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Email">Email *</label>
-                                <input type="email" class="form-control" asp-for="Email" id="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Contacto">Contacto Principal</label>
-                                <input type="text" class="form-control mayusculas" asp-for="Contacto" id="Contacto">
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="NombreSocioPrincipal">Nombre Socio Principal</label>
-                                <input type="text" class="form-control mayusculas" asp-for="NombreSocioPrincipal" id="NombreSocioPrincipal">
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label asp-for="Codigo">Código</label>
+								<input type="text" class="form-control" asp-for="Codigo" id="Codigo">
+							</div>
+							<div class="form-group">
+								<label asp-for="Nombre">Nombre *</label>
+								<input type="text" class="form-control mayusculas" asp-for="Nombre" id="Nombre" required>
+							</div>
+							<div class="form-group">
+								<label asp-for="RTN">RTN</label>
+								<input type="text" class="form-control" asp-for="RTN" id="RTN">
+							</div>
+							<div class="form-group">
+								<label asp-for="TipoEntidad">Tipo de Entidad</label>
+								<select class="form-control" asp-for="TipoEntidad" id="TipoEntidad">
+									<option value="">Seleccione...</option>
+									<option value="C">Compañía</option>
+									<option value="G">Gobierno</option>
+									<option value="I">Individual</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label asp-for="Tipo">Tipo</label>
+								<select class="form-control" asp-for="Tipo" id="Tipo">
+									<option value="C">Cliente</option>
+									<option value="S">Proveedor</option>
+									<option value="L">Lead</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label asp-for="Telefono">Teléfono *</label>
+								<input type="text" class="form-control" asp-for="Telefono" id="Telefono" required>
+							</div>
+							<div class="form-group">
+								<label asp-for="Telefono2">Teléfono 2</label>
+								<input type="text" class="form-control" asp-for="Telefono2" id="Telefono2">
+							</div>
+							<div class="form-group">
+								<label asp-for="Email">Email *</label>
+								<input type="email" class="form-control" asp-for="Email" id="Email" required>
+							</div>
+							<div class="form-group">
+								<label asp-for="Contacto">Contacto Principal</label>
+								<input type="text" class="form-control mayusculas" asp-for="Contacto" id="Contacto">
+							</div>
+							<div class="form-group">
+								<label asp-for="NombreSocioPrincipal">Nombre Socio Principal</label>
+								<input type="text" class="form-control mayusculas" asp-for="NombreSocioPrincipal" id="NombreSocioPrincipal">
+							</div>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label asp-for="Direccion">Dirección</label>
-                                <textarea class="form-control" asp-for="Direccion" id="Direccion" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label asp-for="Direccion">Dirección</label>
+								<textarea class="form-control" asp-for="Direccion" id="Direccion" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
 
-                    <h4 class="card-title mt-4">Información Financiera</h4>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="Balance">Saldo Actual</label>
-                                <input type="text" class="form-control currency-input" asp-for="Balance" id="Balance">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="ChecksBal">Saldo en Cheques</label>
-                                <input type="text" class="form-control currency-input" asp-for="ChecksBal" id="ChecksBal">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="LimiteCredito">Límite de Crédito</label>
-                                <input type="text" class="form-control currency-input" asp-for="LimiteCredito" id="LimiteCredito">
-                            </div>
-                        </div>
-                    </div>
+					<h4 class="card-title mt-4">Información Financiera</h4>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Balance">Saldo Actual</label>
+								<input type="text" class="form-control currency-input" asp-for="Balance" id="Balance">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="ChecksBal">Saldo en Cheques</label>
+								<input type="text" class="form-control currency-input" asp-for="ChecksBal" id="ChecksBal">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="LimiteCredito">Límite de Crédito</label>
+								<input type="text" class="form-control currency-input" asp-for="LimiteCredito" id="LimiteCredito">
+							</div>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="TerminoPago">Términos de Pago (días)</label>
-                                <input type="number" class="form-control" asp-for="TerminoPago" id="TerminoPago">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="Descuento">Descuento (%)</label>
-                                <input type="number" step="0.01" class="form-control" asp-for="Descuento" id="Descuento">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="ListaPrecio">Lista de Precios</label>
-                                <select class="form-control" asp-for="ListaPrecio" id="ListaPrecio">
-                                    <option value="1">Lista 1</option>
-                                    <option value="2">Lista 2</option>
-                                    <option value="3">Lista 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="TerminoPago">Términos de Pago (días)</label>
+								<input type="number" class="form-control" asp-for="TerminoPago" id="TerminoPago">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Descuento">Descuento (%)</label>
+								<input type="number" step="0.01" class="form-control" asp-for="Descuento" id="Descuento">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="ListaPrecio">Lista de Precios</label>
+								<select class="form-control" asp-for="ListaPrecio" id="ListaPrecio">
+									<option value="1">Lista 1</option>
+									<option value="2">Lista 2</option>
+									<option value="3">Lista 3</option>
+								</select>
+							</div>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="Moneda">Moneda</label>
-                                <select class="form-control" asp-for="Moneda" id="Moneda">
-                                    <option value="HNL">Lempiras (HNL)</option>
-                                    <option value="USD">Dólares (USD)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="Pais">País</label>
-                                <select class="form-control" asp-for="Pais" id="Pais">
-                                    <option value="1">Honduras</option>
-                                    <option value="2">Estados Unidos</option>
-                                    <option value="3">Guatemala</option>
-                                    <option value="4">El Salvador</option>
-                                    <option value="5">Nicaragua</option>
-                                    <option value="6">Costa Rica</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label asp-for="Ciudad">Ciudad</label>
-                                <select class="form-control" asp-for="Ciudad" id="Ciudad">
-                                    <option value="1">Tegucigalpa</option>
-                                    <option value="2">San Pedro Sula</option>
-                                    <option value="3">La Ceiba</option>
-                                    <option value="4">Comayagua</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Moneda">Moneda</label>
+								<select class="form-control" asp-for="Moneda" id="Moneda">
+									<option value="HNL">Lempiras (HNL)</option>
+									<option value="USD">Dólares (USD)</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Pais">País</label>
+								<select class="form-control" asp-for="Pais" id="Pais">
+									<option value="1">Honduras</option>
+									<option value="2">Estados Unidos</option>
+									<option value="3">Guatemala</option>
+									<option value="4">El Salvador</option>
+									<option value="5">Nicaragua</option>
+									<option value="6">Costa Rica</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Ciudad">Ciudad</label>
+								<select class="form-control" asp-for="Ciudad" id="Ciudad">
+									<option value="1">Tegucigalpa</option>
+									<option value="2">San Pedro Sula</option>
+									<option value="3">La Ceiba</option>
+									<option value="4">Comayagua</option>
+								</select>
+							</div>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="CuentaContable">Cuenta Contable</label>
-                                <input type="text" class="form-control" asp-for="CuentaContable" id="CuentaContable">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="VendedorAsignado">Vendedor Asignado</label>
-                                <select class="form-control" asp-for="VendedorAsignado" id="VendedorAsignado">
-                                    <option value="1">Vendedor 1</option>
-                                    <option value="2">Vendedor 2</option>
-                                    <option value="3">Vendedor 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label asp-for="CuentaContable">Cuenta Contable</label>
+								<input type="text" class="form-control" asp-for="CuentaContable" id="CuentaContable">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label asp-for="VendedorAsignado">Vendedor Asignado</label>
+								<select class="form-control" asp-for="VendedorAsignado" id="VendedorAsignado">
+									<option value="1">Vendedor 1</option>
+									<option value="2">Vendedor 2</option>
+									<option value="3">Vendedor 3</option>
+								</select>
+							</div>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label asp-for="Notas">Notas</label>
-                                <textarea class="form-control" asp-for="Notas" id="Notas" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label asp-for="Notas">Notas</label>
+								<textarea class="form-control" asp-for="Notas" id="Notas" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
 
-                    <div class="text-end mt-4">
-                        <button type="button" class="btn btn-secondary" onclick="window.location.href='/Customer'">
-                            <i class="fas fa-times"></i> Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Guardar Cambios
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+					<div class="text-end mt-4">
+						<button type="button" class="btn btn-secondary" onclick="window.location.href='/Customer'">
+							<i class="fas fa-times"></i> Cancelar
+						</button>
+						<button type="submit" class="btn btn-primary">
+							<i class="fas fa-save"></i> Guardar Cambios
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 
-        <!-- Sección de Contactos -->
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="card-title mb-0">Contactos</h4>
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addContactModal">
-                        <i class="fas fa-plus"></i> Agregar Contacto
-                    </button>
-                </div>
+		<!-- Sección de Contactos -->
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex justify-content-between align-items-center">
+					<h4 class="card-title mb-0">Contactos</h4>
+					<button type="button"
+							class="btn btn-primary btn-sm"
+							data-bs-toggle="modal"
+							data-bs-target="#createContactModal"
+							onclick="openCreateContactModal(@Model.Id)">
+						<i class="fas fa-plus"></i> Agregar Contacto
+					</button>
+				</div>
 
-                @if (Model.Contactos.Any())
-                {
-                    <div class="table-responsive mt-3">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Cargo</th>
-                                    <th>Teléfono</th>
-                                    <th>Email</th>
-                                    <th>Principal</th>
-                                    <th class="text-end">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var contacto in Model.Contactos)
-                                {
-                                    <tr>
-                                        <td>@contacto.Nombre</td>
-                                        <td>@(contacto.Cargo ?? "--")</td>
-                                        <td>@(contacto.Telefono ?? "--")</td>
-                                        <td>
-                                            @if (!string.IsNullOrEmpty(contacto.Email))
-                                            {
-                                                <a href="mailto:@contacto.Email">@contacto.Email</a>
-                                            }
-                                            else
-                                            {
-                                                <span>--</span>
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (contacto.EsPrincipal)
-                                            {
-                                                <span class="badge bg-success">Sí</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge bg-secondary">No</span>
-                                            }
-                                        </td>
-                                        <td class="text-end">
-                                            <div class="dropdown dropdown-action">
-                                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#" onclick="editContact(@contacto.Id)">
-                                                        <i class="far fa-edit me-2"></i>Editar
-                                                    </a>
-                                                    <a class="dropdown-item" href="#" onclick="deleteContact(@contacto.Id, '@contacto.Nombre')">
-                                                        <i class="far fa-trash-alt me-2"></i>Eliminar
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="alert alert-info mt-3">
-                        No se han registrado contactos para este cliente.
-                    </div>
-                }
-            </div>
-        </div>
+				@if (Model.Contactos.Any())
+				{
+					<div class="table-responsive mt-3">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Cargo</th>
+									<th>Teléfono</th>
+									<th>Email</th>
+									<th>Principal</th>
+									<th class="text-end">Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var contacto in Model.Contactos)
+								{
+									<tr>
+										<td>@contacto.Nombre</td>
+										<td>@(contacto.Cargo ?? "--")</td>
+										<td>@(contacto.Telefono ?? "--")</td>
+										<td>
+											@if (!string.IsNullOrEmpty(contacto.Email))
+											{
+												<a href="mailto:@contacto.Email">@contacto.Email</a>
+											}
+											else
+											{
+												<span>--</span>
+											}
+										</td>
+										<td>
+											@if (contacto.EsPrincipal)
+											{
+												<span class="badge bg-success">Sí</span>
+											}
+											else
+											{
+												<span class="badge bg-secondary">No</span>
+											}
+										</td>
+										<td class="text-end">
+											<div class="dropdown dropdown-action">
+												<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="fas fa-ellipsis-v"></i>
+												</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item" href="#" onclick="editContact(@contacto.Id)">
+														<i class="far fa-edit me-2"></i>Editar
+													</a>
+													<a class="dropdown-item" href="#" onclick="deleteContact(@contacto.Id, '@contacto.Nombre')">
+														<i class="far fa-trash-alt me-2"></i>Eliminar
+													</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				}
+				else
+				{
+					<div class="alert alert-info mt-3">
+						No se han registrado contactos para este cliente.
+					</div>
+				}
+			</div>
+		</div>
 
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Información Adicional</h4>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Fecha de Registro:</label>
-                            <p class="form-control-static">@Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Última Actualización:</label>
-                            <p class="form-control-static">@Model.UpdatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Notas:</label>
-                    <p class="form-control-static">@(Model.Notas ?? "Sin notas adicionales")</p>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Información Adicional</h4>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Fecha de Registro:</label>
+							<p class="form-control-static">@Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Última Actualización:</label>
+							<p class="form-control-static">@Model.UpdatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Notas:</label>
+					<p class="form-control-static">@(Model.Notas ?? "Sin notas adicionales")</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<!-- Modal para agregar contacto -->
-<div class="modal fade" id="addContactModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Agregar Nuevo Contacto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="addContactForm" asp-action="AddContact" method="post">
-                <input type="hidden" name="ClienteId" value="@Model.Id" />
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nombre *</label>
-                        <input type="text" class="form-control" name="Nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Cargo</label>
-                        <input type="text" class="form-control" name="Cargo">
-                    </div>
-                    <div class="form-group">
-                        <label>Teléfono</label>
-                        <input type="text" class="form-control" name="Telefono">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="Email">
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="EsPrincipal" id="EsPrincipal">
-                        <label class="form-check-label" for="EsPrincipal">Contacto Principal</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<!-- Modal para Crear Contacto -->
+<div class="modal fade" id="createContactModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-primary text-white">
+				<h5 class="modal-title">
+					<i class="fas fa-user-plus me-2"></i>Nuevo Contacto
+				</h5>
+				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			<form id="createContactForm"
+				  asp-controller="Customer"
+				  asp-action="AddContact"
+				  method="post">
+				@Html.AntiForgeryToken()
+
+				<input type="hidden" name="ClienteId" id="createContactClienteId" value="@Model.Id">
+
+				<div class="modal-body">
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-user me-2"></i>Nombre *</label>
+						<input type="text" class="form-control" name="Nombre" id="createContactNombre" required>
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-briefcase me-2"></i>Cargo</label>
+						<input type="text" class="form-control" name="Cargo" id="createContactCargo">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-phone me-2"></i>Teléfono</label>
+						<input type="text" class="form-control" name="Telefono" id="createContactTelefono">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-envelope me-2"></i>Email</label>
+						<input type="email" class="form-control" name="Email" id="createContactEmail">
+					</div>
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="checkbox" name="EsPrincipal" id="createContactEsPrincipal">
+						<label class="form-check-label fw-bold" for="createContactEsPrincipal">
+							<i class="fas fa-star me-2"></i>Contacto Principal
+						</label>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+						<i class="fas fa-times-circle me-2"></i>Cancelar
+					</button>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save me-2"></i>Guardar Contacto
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
-<!-- Modal para editar contacto -->
+<!-- Modal para Editar Contacto -->
 <div class="modal fade" id="editContactModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Editar Contacto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="editContactForm" asp-action="EditContact" method="post">
-                <input type="hidden" name="Id" id="editContactId">
-                <input type="hidden" name="ClienteId" value="@Model.Id">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nombre *</label>
-                        <input type="text" class="form-control" name="Nombre" id="editContactNombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Cargo</label>
-                        <input type="text" class="form-control" name="Cargo" id="editContactCargo">
-                    </div>
-                    <div class="form-group">
-                        <label>Teléfono</label>
-                        <input type="text" class="form-control" name="Telefono" id="editContactTelefono">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="Email" id="editContactEmail">
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="EsPrincipal" id="editContactEsPrincipal">
-                        <label class="form-check-label" for="editContactEsPrincipal">Contacto Principal</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times-circle"></i> Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Guardar Cambios
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-warning text-dark">
+				<h5 class="modal-title">
+					<i class="fas fa-user-edit me-2"></i>Editar Contacto
+				</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			<form id="editContactForm"
+				  asp-controller="Customer"
+				  asp-action="EditContact"
+				  method="post">
+				@Html.AntiForgeryToken()
+
+				<input type="hidden" name="Id" id="editContactId">
+				<input type="hidden" name="ClienteId" id="editContactClienteId" value="@Model.Id">
+
+				<div class="modal-body">
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-user me-2"></i>Nombre *</label>
+						<input type="text" class="form-control" name="Nombre" id="editContactNombre" required>
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-briefcase me-2"></i>Cargo</label>
+						<input type="text" class="form-control" name="Cargo" id="editContactCargo">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-phone me-2"></i>Teléfono</label>
+						<input type="text" class="form-control" name="Telefono" id="editContactTelefono">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-envelope me-2"></i>Email</label>
+						<input type="email" class="form-control" name="Email" id="editContactEmail">
+					</div>
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="checkbox" name="EsPrincipal" id="editContactEsPrincipal">
+						<label class="form-check-label fw-bold" for="editContactEsPrincipal">
+							<i class="fas fa-star me-2"></i>Contacto Principal
+						</label>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+						<i class="fas fa-times-circle me-2"></i>Cancelar
+					</button>
+					<button type="submit" class="btn btn-warning text-dark">
+						<i class="fas fa-save me-2"></i>Guardar Cambios
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
