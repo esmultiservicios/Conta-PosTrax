@@ -228,5 +228,47 @@
         }, 300); // Ajustar después de la animación del sidebar
     });
 
-    console.log('Tabla de clientes inicializada:', dataTable ? 'OK' : 'ERROR');
+    //Metodo para registrar un cliente
+    $('#createCustomerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const btn = form.find('button[type="submit"]');
+        const originalText = btn.html();
+
+        btn.html('<i class="fas fa-spinner fa-spin me-2"></i> Guardando...').prop('disabled', true);
+
+        const formData = new FormData(this);
+
+        $.ajax({
+            url: form.attr('action') || '/Customer/CreateCustomer',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            headers: {
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+            },
+            success: function (resp) {
+                if (resp.success) {
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: resp.message,
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = `/Customer/Details/${resp.id}`;
+                    });
+                } else {
+                    const msg = resp.errors?.join('<br>') || resp.error || 'Ocurrió un error';
+                    showNotify('error', 'Error', msg);
+                }
+            },
+            error: function () {
+                showNotify('error', 'Error', 'No se pudo guardar el cliente');
+            },
+            complete: function () {
+                btn.html(originalText).prop('disabled', false);
+            }
+        });
+    });
 });

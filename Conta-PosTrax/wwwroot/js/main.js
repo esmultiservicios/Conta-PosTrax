@@ -156,7 +156,6 @@ $(document).on('input', '.mayusculas', function () {
     });
 });
 
-
 var lengthMenu = [
     [5, 10, 20, 30, 50, 100, -1],
     [5, 10, 20, 30, 50, 100, "Todo"]
@@ -381,4 +380,9 @@ function formatCurrency(value) {
     }
     return 'L ' + parseFloat(value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 }
+
+// Convertir a mayúsculas automáticamente
+$(document).on('input', '.mayusculas', function () {
+    $(this).val((_, val) => val.toUpperCase());
+});
 //FIN FUNCIONES ADICIONALES

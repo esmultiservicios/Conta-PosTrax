@@ -1,16 +1,28 @@
-﻿@{
-	ViewData["Title"] = "Agregar Clientes";
+﻿@model Conta_PosTrax.Models.Cliente
+
+@{
+	ViewData["Title"] = "Agregar Cliente";
+}
+
+@section Scripts {
+	<script src="~/js/CreateCustomer.js?v=@DateTime.Now.Ticks"></script>
+	<script src="~/js/customer.contacts.js?v=@DateTime.Now.Ticks"></script>
 }
 
 <div class="page-header">
-	<div class="row">
-		<div class="col-sm-12">
-			<h3 class="page-title">Customers</h3>
+	<div class="row align-items-center">
+		<div class="col">
+			<h3 class="page-title">@ViewData["Title"]</h3>
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
 				<li class="breadcrumb-item"><a href="/Customer">Clientes</a></li>
-				<li class="breadcrumb-item active">Agregar Clientes</li>
+				<li class="breadcrumb-item active">Agregar Cliente</li>
 			</ul>
+		</div>
+		<div class="col-auto">
+			<a href="/Customer" class="btn btn-secondary">
+				<i class="fas fa-arrow-left"></i> Volver
+			</a>
 		</div>
 	</div>
 </div>
@@ -19,142 +31,158 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Basic Info</h4>
-				<form action="#">
+				<h4 class="card-title">Información Básica</h4>
+				<form asp-controller="Customer" asp-action="CreateCustomer" method="post" id="createCustomerForm">
+					@Html.AntiForgeryToken()
+
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control">
+								<label asp-for="Nombre">Nombre *</label>
+								<input type="text" class="form-control mayusculas" asp-for="Nombre" required>
 							</div>
 							<div class="form-group">
-								<label>Email</label>
-								<input type="email" class="form-control">
+								<label asp-for="RTN">RTN</label>
+								<input type="text" class="form-control" asp-for="RTN">
 							</div>
 							<div class="form-group">
-								<label>Primary Currency</label>
-								<select class="select">
-									<option>Select Currency</option>
-									<option>EUR Euro</option>
-									<option>INR Indoan Rupee</option>
-									<option>USD- US Dollar</option>
+								<label asp-for="TipoEntidad">Tipo de Entidad</label>
+								<select class="form-control" asp-for="TipoEntidad">
+									<option value="">Seleccione...</option>
+									<option value="C">Compañía</option>
+									<option value="G">Gobierno</option>
+									<option value="I">Individual</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label asp-for="Tipo">Tipo</label>
+								<select class="form-control" asp-for="Tipo">
+									<option value="C">Cliente</option>
+									<option value="S">Proveedor</option>
+									<option value="L">Lead</option>
 								</select>
 							</div>
 						</div>
+
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Primary Contact Name</label>
-								<input type="text" class="form-control">
+								<label asp-for="Telefono">Teléfono *</label>
+								<input type="text" class="form-control" asp-for="Telefono" required>
 							</div>
 							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control">
+								<label asp-for="Telefono2">Teléfono 2</label>
+								<input type="text" class="form-control" asp-for="Telefono2">
 							</div>
 							<div class="form-group">
-								<label>Website</label>
-								<input type="text" class="form-control">
+								<label asp-for="Email">Email *</label>
+								<input type="email" class="form-control" asp-for="Email" required>
+							</div>
+							<div class="form-group">
+								<label asp-for="Contacto">Contacto Principal</label>
+								<input type="text" class="form-control mayusculas" asp-for="Contacto">
 							</div>
 						</div>
 					</div>
-				</form>
-				<h4 class="card-title mt-4">Billing Address</h4>
-				<form action="#">
+
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label>Name</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>State</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Address</label>
-<textarea rows="5" cols="5" class="form-control" placeholder="Enter Address"></textarea>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Country</label>
-								<select class="select">
-									<option>Select Country</option>
-									<option>Afghanistan</option>
-									<option>Afghanistan</option>
-									<option>Albania</option>
-									<option>Algeria</option>
-									<option>American Samoa</option>
-									<option>Andorra</option>
-									<option>Angola</option>
-									<option>Anguilla</option>
-									<option selected>United States</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>City</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Phone</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Zip Code</label>
-								<input type="text" class="form-control">
+								<label asp-for="Direccion">Dirección</label>
+								<textarea class="form-control" asp-for="Direccion" rows="3"></textarea>
 							</div>
 						</div>
 					</div>
-				</form>
-				<h4 class="card-title mt-4">Shipping Address</h4>
-				<form action="#">
-					<div class="text-end">
-						<button type="submit" class="btn btn-outline-primary btn-sm">Copy from Billing</button>
-					</div>
+
+					<h4 class="card-title mt-4">Información Financiera</h4>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
-								<label>Name:</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>State:</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Address:</label>
-								<textarea rows="5" cols="5" class="form-control" placeholder="Enter Address"></textarea>
+								<label asp-for="Balance">Saldo Actual</label>
+								<input type="text" class="form-control currency-input" asp-for="Balance">
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<div class="form-group">
-								<label>Country:</label>
-								<select class="select">
-									<option>Select Country</option>
-									<option value="Afganistan">Afghanistan</option>
-									<option value="Albania">Albania</option>
-									<option value="Algeria">Algeria</option>
-									<option value="American Samoa">American Samoa</option>
-									<option value="Andorra">Andorra</option>
-									<option value="Angola">Angola</option>
-									<option value="Anguilla">Anguilla</option>
-								</select>
+								<label asp-for="ChecksBal">Saldo en Cheques</label>
+								<input type="text" class="form-control currency-input" asp-for="ChecksBal">
 							</div>
+						</div>
+						<div class="col-md-4">
 							<div class="form-group">
-								<label>City:</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Phone:</label>
-								<input type="text" class="form-control">
-							</div>
-							<div class="form-group">
-								<label>Zip Code:</label>
-								<input type="text" class="form-control">
+								<label asp-for="LimiteCredito">Límite de Crédito</label>
+								<input type="text" class="form-control currency-input" asp-for="LimiteCredito">
 							</div>
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="TerminoPago">Términos de Pago</label>
+								<input type="number" class="form-control" asp-for="TerminoPago">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Descuento">Descuento (%)</label>
+								<input type="number" step="0.01" class="form-control" asp-for="Descuento">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="ListaPrecio">Lista de Precios</label>
+								<select class="form-control" asp-for="ListaPrecio">
+									<option value="1">Lista 1</option>
+									<option value="2">Lista 2</option>
+									<option value="3">Lista 3</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Moneda">Moneda</label>
+								<select class="form-control" asp-for="Moneda">
+									<option value="HNL">Lempiras (HNL)</option>
+									<option value="USD">Dólares (USD)</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Pais">País</label>
+								<select class="form-control" asp-for="Pais">
+									<option value="1">Honduras</option>
+									<option value="2">Estados Unidos</option>
+									<option value="3">Guatemala</option>
+									<option value="4">El Salvador</option>
+									<option value="5">Nicaragua</option>
+									<option value="6">Costa Rica</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label asp-for="Ciudad">Ciudad</label>
+								<select class="form-control" asp-for="Ciudad">
+									<option value="1">Tegucigalpa</option>
+									<option value="2">San Pedro Sula</option>
+									<option value="3">La Ceiba</option>
+									<option value="4">Comayagua</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
 					<div class="text-end mt-4">
-						<button type="submit" class="btn btn-primary">Add Customer</button>
+						<a href="/Customer" class="btn btn-secondary">
+							<i class="fas fa-times"></i> Cancelar
+						</a>
+						<button type="submit" class="btn btn-primary">
+							<i class="fas fa-save"></i> Guardar Cliente
+						</button>
 					</div>
 				</form>
 			</div>

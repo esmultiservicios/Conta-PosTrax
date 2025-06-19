@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Conta_PosTrax.Models.Contacto>
+
+@if (Model.Any())
+{
+    <div class="table-responsive mt-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cargo</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Principal</th>
+                    <th class="text-end">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.Nombre</td>
+                        <td>@(c.Cargo ?? "--")</td>
+                        <td>@(c.Telefono ?? "--")</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(c.Email))
+                            {
+                                <a href="mailto:@c.Email">@c.Email</a>
+                            }
+                            else
+                            {
+                                <span>--</span>
+                            }
+                        </td>
+                        <td>
+                            @if (c.EsPrincipal)
+                            {
+                                <span class="badge bg-success">Sí</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">No</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <div class="dropdown dropdown-action">
+                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item"
+                                       href="javascript:void(0);"
+                                       onclick="editContact('@c.Id')">
+                                        <i class="far fa-edit me-2"></i>Editar
+                                    </a>
+                                    <a class="dropdown-item"
+                                       href="javascript:void(0);"
+                                       onclick="deleteContact('@c.Id', '@c.Nombre')">
+                                        <i class="far fa-trash-alt me-2"></i>Eliminar
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info mt-3">
+        No se han registrado contactos para este cliente.
+    </div>
+}

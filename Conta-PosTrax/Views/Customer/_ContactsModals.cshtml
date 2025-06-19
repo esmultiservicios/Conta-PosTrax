@@ -1,0 +1,114 @@
+﻿<!-- Modal para Crear Contacto -->
+<div class="modal fade" id="createContactModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-primary text-white">
+				<h5 class="modal-title">
+					<i class="fas fa-user-plus me-2"></i>Nuevo Contacto
+				</h5>
+				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			<form id="createContactForm"
+				  asp-controller="Customer"
+				  asp-action="AddContact"
+				  method="post">
+				@Html.AntiForgeryToken()
+
+				<input type="hidden" name="ClienteId" id="createContactClienteId" value="@Model.Id">
+
+				<div class="modal-body">
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-user me-2"></i>Nombre *</label>
+						<input type="text" class="form-control" name="Nombre" id="createContactNombre" required>
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-briefcase me-2"></i>Cargo</label>
+						<input type="text" class="form-control" name="Cargo" id="createContactCargo">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-phone me-2"></i>Teléfono</label>
+						<input type="text" class="form-control" name="Telefono" id="createContactTelefono">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-envelope me-2"></i>Email</label>
+						<input type="email" class="form-control" name="Email" id="createContactEmail">
+					</div>
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="checkbox" name="EsPrincipal" id="createContactEsPrincipal">
+						<label class="form-check-label fw-bold" for="createContactEsPrincipal">
+							<i class="fas fa-star me-2"></i>Contacto Principal
+						</label>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+						<i class="fas fa-times-circle me-2"></i>Cancelar
+					</button>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-save me-2"></i>Guardar Contacto
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal para Editar Contacto -->
+<div class="modal fade" id="editContactModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header bg-warning text-dark">
+				<h5 class="modal-title">
+					<i class="fas fa-user-edit me-2"></i>Editar Contacto
+				</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			<form id="editContactForm"
+				  asp-controller="Customer"
+				  asp-action="EditContact"
+				  method="post">
+				@Html.AntiForgeryToken()
+
+				<input type="hidden" name="Id" id="editContactId">
+				<input type="hidden" name="ClienteId" id="editContactClienteId" value="@Model.Id">
+
+				<div class="modal-body">
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-user me-2"></i>Nombre *</label>
+						<input type="text" class="form-control" name="Nombre" id="editContactNombre" required>
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-briefcase me-2"></i>Cargo</label>
+						<input type="text" class="form-control" name="Cargo" id="editContactCargo">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-phone me-2"></i>Teléfono</label>
+						<input type="text" class="form-control" name="Telefono" id="editContactTelefono">
+					</div>
+					<div class="form-group mb-3">
+						<label class="fw-bold"><i class="fas fa-envelope me-2"></i>Email</label>
+						<input type="email" class="form-control" name="Email" id="editContactEmail">
+					</div>
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="checkbox" name="EsPrincipal" id="editContactEsPrincipal">
+						<label class="form-check-label fw-bold" for="editContactEsPrincipal">
+							<i class="fas fa-star me-2"></i>Contacto Principal
+						</label>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+						<i class="fas fa-times-circle me-2"></i>Cancelar
+					</button>
+					<button type="submit" class="btn btn-warning text-dark">
+						<i class="fas fa-save me-2"></i>Guardar Cambios
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

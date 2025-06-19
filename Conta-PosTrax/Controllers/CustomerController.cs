@@ -121,17 +121,65 @@ namespace Conta_PosTrax.Controllers
 
         [HttpPost("AddCustomer")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddCustomer(Cliente cliente)
+        public async Task<IActionResult> AddCustomer([FromForm] Cliente cliente)
         {
-            if (ModelState.IsValid)
+            /* ───────── Validación adicional: RTN único ───────── */
+            if (!string.IsNullOrWhiteSpace(cliente.RTN))
             {
-                cliente.CreatedAt = DateTime.Now;
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                bool rtnDuplicado = await _context.Clientes
+                                                  .AnyAsync(c => c.RTN == cliente.RTN);
+
+                if (rtnDuplicado)
+                    ModelState.AddModelError(nameof(cliente.RTN),
+                        "El RTN ya está registrado para otro cliente.");
             }
-            return View(cliente);
+
+            /* ───────── Validación estándar de atributos [Required] ───────── */
+            if (!ModelState.IsValid)
+            {
+                //  ► Devolvemos 400 con la lista de errores
+                var errores = ModelState.Values
+                                        .SelectMany(v => v.Errors)
+                                        .Select(e => e.ErrorMessage)
+                                        .ToList();
+
+                return BadRequest(new { success = false, errors = errores });
+            }
+
+            /* ───────── Persistencia ───────── */
+            _context.Clientes.Add(cliente);
+            await _context.SaveChangesAsync();
+
+            /* ───────── Respuesta JSON de éxito ───────── */
+            return Ok(new
+            {
+                success = true,
+                message = "Cliente registrado correctamente",
+                clienteId = cliente.Id        // por si el JS necesita redirigir a /Details/{id}
+            });
         }
+
+        //[HttpPost("AddCustomer")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddCustomer(ClienteCreateViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var cliente = new Cliente
+        //        {
+        //            Nombre = model.Nombre,
+        //            Telefono = model.Telefono,
+        //            Email = model.Email,
+        //            // otros campos si querés
+        //        };
+
+        //        _context.Clientes.Add(cliente);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    return View(model);
+        //}
 
         // ==============================================
         // CRUD COMPLETO
@@ -148,17 +196,22 @@ namespace Conta_PosTrax.Controllers
             {
                 return NotFound();
             }
+
             return View(cliente);
         }
 
         [HttpGet("EditCustomer/{id}")]
         public async Task<IActionResult> EditCustomer(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes // _context.Clientes consulta la tabla clientes
+                .Include(c => c.Contactos) // 🔥 Aquí traes también los contactos 1:N
+                .FirstOrDefaultAsync(c => c.Id == id); // Este es la condicion del tipo de cliente
+
             if (cliente == null)
             {
                 return NotFound();
             }
+
             return View(cliente);
         }
 
@@ -210,8 +263,7 @@ namespace Conta_PosTrax.Controllers
                 existente.Ciudad = cliente.Ciudad;
                 existente.CuentaContable = cliente.CuentaContable;
                 existente.VendedorAsignado = cliente.VendedorAsignado;
-                existente.Notas = cliente.Notas;
-                existente.UpdatedAt = DateTime.Now;
+                existente.Notas = cliente.Notas;                
 
                 await _context.SaveChangesAsync();
 
@@ -283,6 +335,17 @@ namespace Conta_PosTrax.Controllers
             });
         }
 
+        [HttpGet("GetContactsByCustomer/{clienteId}")]
+        public async Task<IActionResult> GetContactsByCustomer(int clienteId)
+        {
+            var contactos = await _context.Contactos
+                .Where(c => c.ClienteId == clienteId)
+                .OrderBy(c => c.Nombre)
+                .ToListAsync();
+
+            return PartialView("_ContactsTable", contactos);
+        }
+
         [HttpPost("AddContact")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddContact([FromForm] Contacto contacto)
@@ -331,11 +394,12 @@ namespace Conta_PosTrax.Controllers
 
         [HttpPost("EditContact")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditContact([FromForm] Contacto contacto)
+        public async Task<IActionResult> EditContact([FromBody] Contacto contacto) // Cambiado a FromBody
         {
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                   .Select(e => e.ErrorMessage);
                 return Json(new { success = false, errors });
             }
 
@@ -347,20 +411,36 @@ namespace Conta_PosTrax.Controllers
                     return Json(new { success = false, error = "Contacto no encontrado" });
                 }
 
+                // Validar y actualizar contacto principal si es necesario
+                if (contacto.EsPrincipal)
+                {
+                    var principales = await _context.Contactos
+                        .Where(c => c.ClienteId == contacto.ClienteId &&
+                                   c.Id != contacto.Id &&
+                                   c.EsPrincipal)
+                        .ToListAsync();
+
+                    foreach (var principal in principales)
+                    {
+                        principal.EsPrincipal = false;
+                        _context.Update(principal);
+                    }
+                }
+
                 // Actualizar campos
                 existente.Nombre = contacto.Nombre;
                 existente.Cargo = contacto.Cargo;
                 existente.Telefono = contacto.Telefono;
                 existente.Email = contacto.Email;
                 existente.EsPrincipal = contacto.EsPrincipal;
-                existente.UpdatedAt = DateTime.Now;
 
                 await _context.SaveChangesAsync();
 
                 return Json(new
                 {
                     success = true,
-                    message = "Contacto actualizado correctamente"
+                    message = "Contacto actualizado correctamente",
+                    contactoId = existente.Id
                 });
             }
             catch (Exception ex)
